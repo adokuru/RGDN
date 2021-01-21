@@ -1,3 +1,35 @@
-import { AppRegistry,} from 'react-native';
-import Splash from './components/Splash';
-AppRegistry.registerComponent('RGDN', ()=> Splash)
+import { StatusBar } from 'expo-status-bar';
+import React,{Component} from 'react';
+import { ImageBackground, StyleSheet, Text, View, Image } from 'react-native';
+
+const bgImage = require('./assets/splashBg.png');
+const imgLogo = require('./assets/logo.png');
+
+export default class App extends Component {
+  render(){
+    return (
+      <ImageBackground source={bgImage} style={styles.container}>
+        <View style={styles.logoBox}>
+          <Image source={imgLogo} style={{width: 300, height: 150, resizeMode: 'stretch',}}/>
+        </View>
+        <StatusBar style="auto" />
+      </ImageBackground>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoBox: {
+    backgroundColor: '#fff',
+    opacity: .9,
+    width: '100%',
+    alignItems: 'center',
+  }
+});
+
