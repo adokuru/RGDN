@@ -1,7 +1,7 @@
-
-#RDGN-App
+# RDGN-App
 
 ## File Structure
+
 Within the download you'll find the following directories and files:
 
 ```
@@ -51,4 +51,3 @@ Facebook: <https://www.facebook.com/danoitech>
 Dribbble: <https://dribbble.com/danoitech>
 
 Instagram: <https://www.instagram.com/danoi_tech>
-
