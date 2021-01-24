@@ -1,21 +1,14 @@
 {
   "expo": {
-    "name": "RGDN",
-    "description": "RGDN - App for Rapsody",
-    "slug": "RGDN",
-    "privacy": "listed",
-    "sdkVersion": "39.0.0",
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "version": "1.0",
-    "orientation": "default",
-    "icon": "./assets/images/icon.png",
+    "name": "RGDN-APP",
+    "slug": "RGDN-APP",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/images/splashBg.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#fff"
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -28,9 +21,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/icon.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
     }
   }
 }
