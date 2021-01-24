@@ -2,7 +2,7 @@ Arguments:
   C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
 
 PATH: 
-  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\HP\bin;C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin;C:\Python38\Scripts;C:\Python38;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Yarn\bin;C:\Program Files\nodejs;C:\Program Files (x86)\dotnet;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\HP\AppData\Local\Programs\Python\Python38-32\Scripts;C:\Users\HP\AppData\Local\Programs\Python\Python38-32;C:\Users\HP\AppData\Local\Microsoft\WindowsApps;C:\Users\HP\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\HP\AppData\Roaming\Composer\vendor\bin;C:\Program Files\heroku\bin;C:\src\flutter\bin;C:\Users\HP\AppData\Local\Yarn\bin;C:\Users\HP\AppData\Roaming\npm;C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin
+  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\HP\bin;C:\Python39\Scripts;C:\Python39;C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin;C:\Python38\Scripts;C:\Python38;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Yarn\bin;C:\Program Files (x86)\dotnet;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\nodejs;C:\Users\HP\AppData\Local\Programs\Python\Python38-32\Scripts;C:\Users\HP\AppData\Local\Programs\Python\Python38-32;C:\Users\HP\AppData\Local\Microsoft\WindowsApps;C:\Users\HP\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\HP\AppData\Roaming\Composer\vendor\bin;C:\Program Files\heroku\bin;C:\src\flutter\bin;C:\Users\HP\AppData\Local\Yarn\bin;C:\Program Files\AdoptOpenJDK\jdk-11.0.9.101-hotspot\bin;C:\Users\HP\AppData\Roaming\npm
 
 Yarn version: 
   1.21.1
@@ -14,38 +14,54 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: connect EHOSTUNREACH 104.16.18.35:443
-      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1146:16)
+  Error: ENOENT: no such file or directory, open 'C:\Users\HP\AppData\Local\Yarn\Cache\v6\npm-@expo-traveling-fastlane-linux-1.11.4-4e9c3533726528fb220100cb7cce2fcba02d1758-integrity\node_modules\@expo\traveling-fastlane-linux\.yarn-metadata.json'
 
 npm manifest: 
   {
+    "name": "rn-material-kit-free",
+    "version": "1.7.0",
+    "description": "Material Kit React Native. Coded by Creative Tim",
     "main": "node_modules/expo/AppEntry.js",
+    "private": true,
     "scripts": {
-      "start": "expo start",
-      "android": "expo start --android",
-      "ios": "expo start --ios",
-      "web": "expo start --web",
-      "eject": "expo eject"
+      "start": "cross-env REACT_EDITOR=code expo start",
+      "android": "cross-env REACT_EDITOR=code expo start --android",
+      "ios": "cross-env REACT_EDITOR=code expo start --ios",
+      "eject": "expo eject",
+      "test": "node ./node_modules/jest/bin/jest.js --watchAll"
+    },
+    "jest": {
+      "preset": "jest-expo"
     },
     "dependencies": {
-      "@react-navigation/native": "^5.9.0",
-      "@react-navigation/stack": "^5.13.0",
-      "expo": "~40.0.0",
-      "expo-status-bar": "~1.0.3",
+      "@react-native-community/masked-view": "0.1.10",
+      "@react-navigation/compat": "~5.1.25",
+      "@react-navigation/drawer": "~5.8.2",
+      "@react-navigation/native": "~5.5.0",
+      "@react-navigation/stack": "~5.4.1",
+      "expo": "^39.0.0",
+      "expo-asset": "~8.2.0",
+      "expo-font": "~8.3.0",
+      "expo-linear-gradient": "~8.3.0",
+      "galio-framework": "~0.7.1",
       "react": "16.13.1",
-      "react-dom": "16.13.1",
-      "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
-      "react-native-web": "~0.13.12",
+      "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
+      "react-native-gesture-handler": "~1.7.0",
+      "react-native-modal-dropdown": "git+https://github.com/siemiatj/react-native-modal-dropdown.git",
       "react-native-reanimated": "~1.13.0",
-      "react-native-gesture-handler": "~1.8.0",
-      "react-native-screens": "~2.15.0",
-      "react-native-safe-area-context": "3.1.9",
-      "@react-native-community/masked-view": "0.1.10"
+      "react-native-safe-area-context": "3.1.4",
+      "react-native-screens": "~2.10.1"
     },
     "devDependencies": {
-      "@babel/core": "~7.9.0"
+      "babel-preset-expo": "^8.3.0",
+      "cross-env": "~7.0.0",
+      "expo-cli": "~3.11.7",
+      "jest-expo": "^39.0.0"
     },
-    "private": true
+    "bugs": {
+      "url": "https://github.com/creativetimofficial/material-kit-react-native/issues"
+    },
+    "homepage": "https://demos.creative-tim.com/material-kit-react-native/"
   }
 
 yarn manifest: 
