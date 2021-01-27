@@ -138,7 +138,8 @@ const SignUp = ({ navigation }) => {
             alignItems: "center",
             justifyContent: "center",
           }}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.replace("DrawerNavigationRoutes")}
+          // onPress={() => navigation.navigate("Home")}
         >
           <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Login</Text>
         </TouchableOpacity>
@@ -166,7 +167,7 @@ const SignUp = ({ navigation }) => {
             <Text style={{ color: COLORS.black, ...FONTS.h2 }}>
               Don’t have a account?{" "}
               <TouchableWithoutFeedback
-                onPress={() => navigation.navigate("Signup")}
+                onPress={() => navigation.navigate("SignUp")}
               >
                 <Text color={"#032B80"}>Click here</Text>
               </TouchableWithoutFeedback>

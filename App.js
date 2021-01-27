@@ -1,8 +1,9 @@
 import React from "react";
 
-import { Login, Home } from "./screens";
+import { Login, SignUp } from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import DrawerNavigationRoutes from "./navigation/DrawerNavigationRoutes";
 
 const theme = {
   ...DefaultTheme,
@@ -13,7 +14,23 @@ const theme = {
 };
 
 const Stack = createStackNavigator();
-
+const Auth = () => {
+  // Stack Navigator for Login and Sign up Screen
+  return (
+    <Stack.Navigator initialRouteName='Login'>
+      <Stack.Screen
+        name='Login'
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='SignUp'
+        component={SignUp}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+};
 const App = () => {
   return (
     <NavigationContainer theme={theme}>
@@ -23,10 +40,20 @@ const App = () => {
         }}
         initialRouteName={"Login"}
       >
-        <Stack.Screen name='Login' component={Login} />
+        {/* Auth Navigator which includer Login Signup will come once */}
+        <Stack.Screen
+          name='Auth'
+          component={Auth}
+          options={{ headerShown: false }}
+        />
 
         {/* Drawer Navigation */}
-        <Stack.Screen name='Home' component={Home} />
+        <Stack.Screen
+          name='DrawerNavigationRoutes'
+          component={DrawerNavigationRoutes}
+          // Hiding header for Navigation Drawer as we will use our custom header
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

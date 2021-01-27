@@ -28,7 +28,7 @@ const SignUp = ({ navigation }) => {
           marginTop: SIZES.padding * 6,
           paddingHorizontal: SIZES.padding * 2,
         }}
-        onPress={() => console.log("Sign Up")}
+        onPress={() => navigation.navigate("Login")}
       >
         <Image
           source={icons.back}
@@ -36,14 +36,14 @@ const SignUp = ({ navigation }) => {
           style={{
             width: 20,
             height: 20,
-            tintColor: COLORS.white,
+            tintColor: COLORS.black,
           }}
         />
 
         <Text
           style={{
             marginLeft: SIZES.padding * 1.5,
-            color: COLORS.white,
+            color: COLORS.black,
             ...FONTS.h4,
           }}
         >
@@ -64,7 +64,7 @@ const SignUp = ({ navigation }) => {
         }}
       >
         <Image
-          source={images.wallieLogo}
+          source={images.RgdnLogo}
           resizeMode='contain'
           style={{
             width: "60%",
@@ -83,42 +83,53 @@ const SignUp = ({ navigation }) => {
         }}
       >
         {/* Full Name */}
-        <View style={{ marginTop: SIZES.padding * 3 }}>
-          <Text style={{ color: COLORS.lightGreen, ...FONTS.body3 }}>
-            Full Name
-          </Text>
+        <View style={{ marginTop: SIZES.padding * 1 }}>
           <TextInput
             style={{
               marginVertical: SIZES.padding,
-              borderBottomColor: COLORS.white,
+              borderBottomColor: COLORS.black,
               borderBottomWidth: 1,
               height: 40,
-              color: COLORS.white,
+              color: COLORS.black,
               ...FONTS.body3,
             }}
             placeholder='Enter Full Name'
-            placeholderTextColor={COLORS.white}
-            selectionColor={COLORS.white}
+            placeholderTextColor={COLORS.black}
+            selectionColor={COLORS.black}
+          />
+        </View>
+
+        {/* Username */}
+        <View style={{ marginTop: SIZES.padding * 2 }}>
+          <TextInput
+            style={{
+              marginVertical: SIZES.padding,
+              borderBottomColor: COLORS.black,
+              borderBottomWidth: 1,
+              height: 40,
+              color: COLORS.black,
+              ...FONTS.body3,
+            }}
+            placeholder='Username'
+            placeholderTextColor={COLORS.black}
+            selectionColor={COLORS.black}
           />
         </View>
 
         {/* Password */}
         <View style={{ marginTop: SIZES.padding * 2 }}>
-          <Text style={{ color: COLORS.lightGreen, ...FONTS.body3 }}>
-            Password
-          </Text>
           <TextInput
             style={{
               marginVertical: SIZES.padding,
-              borderBottomColor: COLORS.white,
+              borderBottomColor: COLORS.black,
               borderBottomWidth: 1,
               height: 40,
-              color: COLORS.white,
+              color: COLORS.black,
               ...FONTS.body3,
             }}
             placeholder='Enter Password'
-            placeholderTextColor={COLORS.white}
-            selectionColor={COLORS.white}
+            placeholderTextColor={COLORS.black}
+            selectionColor={COLORS.black}
             secureTextEntry={!showPassword}
           />
           <TouchableOpacity
@@ -136,7 +147,7 @@ const SignUp = ({ navigation }) => {
               style={{
                 height: 20,
                 width: 20,
-                tintColor: COLORS.white,
+                tintColor: COLORS.black,
               }}
             />
           </TouchableOpacity>
@@ -151,14 +162,14 @@ const SignUp = ({ navigation }) => {
         <TouchableOpacity
           style={{
             height: 60,
-            backgroundColor: COLORS.black,
+            backgroundColor: COLORS.primary,
             borderRadius: SIZES.radius / 1.5,
             alignItems: "center",
             justifyContent: "center",
           }}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.replace("DrawerNavigationRoutes")}
         >
-          <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Continue</Text>
+          <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Sign Up</Text>
         </TouchableOpacity>
       </View>
     );
@@ -169,10 +180,7 @@ const SignUp = ({ navigation }) => {
       behavior={Platform.OS === "ios" ? "padding" : null}
       style={{ flex: 1 }}
     >
-      <LinearGradient
-        colors={[COLORS.lime, COLORS.emerald]}
-        style={{ flex: 1 }}
-      >
+      <LinearGradient colors={[COLORS.white, COLORS.white]} style={{ flex: 1 }}>
         <ScrollView>
           {renderHeader()}
           {renderLogo()}
