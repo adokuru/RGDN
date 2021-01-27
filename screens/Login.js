@@ -6,8 +6,6 @@ import {
   TouchableWithoutFeedback,
   Image,
   TextInput,
-  Modal,
-  FlatList,
   KeyboardAvoidingView,
   ScrollView,
   Platform,

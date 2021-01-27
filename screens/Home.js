@@ -49,16 +49,27 @@ const Home = () => {
       </View>
       <View
         style={{
-          height: 130,
+          height: 120,
           borderRadius: 20,
-          backgroundColor: COLORS.lightyellow,
+          backgroundColor: COLORS.black,
         }}
       >
         <LinearGradient
           colors={[COLORS.color1, COLORS.color2]}
-          style={{ flex: 1, flexDirection: "row" }}
+          style={{ flex: 1, flexDirection: "row", borderRadius: 5 }}
         >
-          <View></View>
+          <View>
+            <Image
+              source={icons.wallet}
+              style={{
+                width: 100,
+                height: 100,
+                marginVertical: SIZES.padding,
+                marginHorizontal: SIZES.padding,
+                tintColor: COLORS.white,
+              }}
+            />
+          </View>
           <View>
             <Text>Earnings</Text>
             <Text>₦12 487.12</Text>
