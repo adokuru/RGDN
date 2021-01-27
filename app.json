@@ -3,7 +3,7 @@
     "name": "RGDN-APP",
     "slug": "RGDN-APP",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splashBg.png",
@@ -13,7 +13,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -26,6 +28,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
+    "description": "Rhapsody of Realities: The Rhapsody Global Distributors Network (RGDN), is a global network of individuals or organizations committed to reaching their respective worlds with the purchase and distribution of Rhapsody of Realities daily devotional."
   }
 }

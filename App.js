@@ -1,47 +1,35 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import React from "react";
 
-import React from 'react';
-
-import { SignUp } from "./screens";
+import { Login, Home } from "./screens";
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-
-import Tabs from "./navigation/tabs";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 
 const theme = {
-    ...DefaultTheme,
-    colors: {
-        ...DefaultTheme.colors,
-        border: "transparent",
-    },
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    border: "transparent",
+  },
 };
 
 const Stack = createStackNavigator();
 
 const App = () => {
-    return (
-        <NavigationContainer theme={theme}>
-            <Stack.Navigator
-                screenOptions={{
-                    headerShown: false
-                }}
-                initialRouteName={'SignUp'}
-            >
-                <Stack.Screen name="SignUp" component={SignUp} />
+  return (
+    <NavigationContainer theme={theme}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+        initialRouteName={"Login"}
+      >
+        <Stack.Screen name='Login' component={Login} />
 
-                {/* Tabs */}
-                <Stack.Screen name="Home" component={Tabs} />
-
-                {/* <Stack.Screen name="Scan" component={Scan} /> */}
-            </Stack.Navigator>
-        </NavigationContainer>
-    )
-}
+        {/* Drawer Navigation */}
+        <Stack.Screen name='Home' component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
 export default App;
