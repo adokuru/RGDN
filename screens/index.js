@@ -1,9 +1,4 @@
-import Home from "./Home"
-import Scan from "./Scan"
-import SignUp from "./SignUp"
+import Home from "./Home";
+import SignUp from "./SignUp";
 
-export {
-    Home,
-    Scan,
-    SignUp
-};
+export { Home, SignUp };
