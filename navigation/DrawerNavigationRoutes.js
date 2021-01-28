@@ -38,28 +38,113 @@ const HomeStack = ({ navigation }) => {
   );
 };
 
-const settingScreenStack = ({ navigation }) => {
+const WalletScreenStack = ({ navigation }) => {
   return (
     <Stack.Navigator
-      initialRouteName='SettingsScreen'
+      initialRouteName='Wallet'
       screenOptions={{
+        title: "Home", //Set Header Title
         headerLeft: () => (
           <NavigationDrawerHeader navigationProps={navigation} />
         ),
         headerStyle: {
-          backgroundColor: "#032B80", //Set Header color
+          backgroundColor: "#fff", //Set Header color
         },
-        headerTintColor: "#fff", //Set Header text color
+        headerTintColor: "#111", //Set Header text color
         headerTitleStyle: {
           fontWeight: "bold", //Set Header text style
         },
       }}
     >
       <Stack.Screen
-        name='SettingsScreen'
-        component={SettingsScreen}
+        name='Wallet'
+        component={Wallet}
         options={{
-          title: "Settings", //Set Header Title
+          title: "Wallet", //Set Header Title
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+const HistoryScreenStack = ({ navigation }) => {
+  return (
+    <Stack.Navigator
+      initialRouteName='History'
+      screenOptions={{
+        title: "History", //Set Header Title
+        headerLeft: () => (
+          <NavigationDrawerHeader navigationProps={navigation} />
+        ),
+        headerStyle: {
+          backgroundColor: "#fff", //Set Header color
+        },
+        headerTintColor: "#111", //Set Header text color
+        headerTitleStyle: {
+          fontWeight: "bold", //Set Header text style
+        },
+      }}
+    >
+      <Stack.Screen
+        name='History'
+        component={History}
+        options={{
+          title: "History", //Set Header Title
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+const LiveServiceScreenStack = ({ navigation }) => {
+  return (
+    <Stack.Navigator
+      initialRouteName='LiveService'
+      screenOptions={{
+        title: "LiveService", //Set Header Title
+        headerLeft: () => (
+          <NavigationDrawerHeader navigationProps={navigation} />
+        ),
+        headerStyle: {
+          backgroundColor: "#fff", //Set Header color
+        },
+        headerTintColor: "#111", //Set Header text color
+        headerTitleStyle: {
+          fontWeight: "bold", //Set Header text style
+        },
+      }}
+    >
+      <Stack.Screen
+        name='LiveService'
+        component={LiveService}
+        options={{
+          title: "LiveService", //Set Header Title
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+const FAQScreenStack = ({ navigation }) => {
+  return (
+    <Stack.Navigator
+      initialRouteName='FAQ'
+      screenOptions={{
+        title: "FAQ", //Set Header Title
+        headerLeft: () => (
+          <NavigationDrawerHeader navigationProps={navigation} />
+        ),
+        headerStyle: {
+          backgroundColor: "#fff", //Set Header color
+        },
+        headerTintColor: "#111", //Set Header text color
+        headerTitleStyle: {
+          fontWeight: "bold", //Set Header text style
+        },
+      }}
+    >
+      <Stack.Screen
+        name='FAQ'
+        component={FAQ}
+        options={{
+          title: "FAQ", //Set Header Title
         }}
       />
     </Stack.Navigator>
@@ -88,22 +173,22 @@ const DrawerNavigatorRoutes = (props) => {
       <Drawer.Screen
         name='Wallet'
         options={{ drawerLabel: "Wallet" }}
-        component={Wallet}
+        component={WalletScreenStack}
       />
       <Drawer.Screen
         name='LiveService'
         options={{ drawerLabel: "LiveService" }}
-        component={LiveService}
+        component={LiveServiceScreenStack}
       />
       <Drawer.Screen
         name='History'
         options={{ drawerLabel: "History" }}
-        component={History}
+        component={HistoryScreenStack}
       />
       <Drawer.Screen
         name='FAQStack'
         options={{ drawerLabel: "FAQ Screen" }}
-        component={FAQ}
+        component={FAQScreenStack}
       />
     </Drawer.Navigator>
   );

@@ -101,55 +101,6 @@ const Home = () => {
 
           <StatusBar style='dark' />
         </View>
-
-        <View
-          style={{
-            height: 120,
-            borderRadius: 20,
-            backgroundColor: COLORS.black,
-            marginVertical: SIZES.padding * 2,
-          }}
-        >
-          <LinearGradient
-            colors={[COLORS.color1, COLORS.color2]}
-            style={{ flex: 1, flexDirection: "row", borderRadius: 5 }}
-          >
-            <View>
-              <Image
-                source={icons.more}
-                style={{
-                  width: 70,
-                  height: 70,
-                  marginVertical: SIZES.padding * 2,
-                  marginHorizontal: SIZES.padding,
-                  tintColor: COLORS.white,
-                }}
-              />
-            </View>
-            <View>
-              <Text
-                style={{
-                  marginVertical: SIZES.padding * 2,
-                  marginHorizontal: SIZES.padding,
-                  color: COLORS.white,
-                  ...FONTS.h1,
-                }}
-              >
-                Copies
-              </Text>
-              <Text
-                style={{
-                  marginVertical: SIZES.padding,
-                  marginHorizontal: SIZES.padding,
-                  color: COLORS.white,
-                  ...FONTS.h2,
-                }}
-              >
-                1
-              </Text>
-            </View>
-          </LinearGradient>
-        </View>
       </ScrollView>
     </SafeAreaView>
   );

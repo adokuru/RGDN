@@ -1,12 +1,10 @@
 import React from "react";
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text } from "react-native";
 
-const FAQ = () => {
+export default function FAQ() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Try editing me! 🎉</Text>
+    <View>
+      <Text>FAQ</Text>
     </View>
   );
-};
-
-export default FAQ;
+}

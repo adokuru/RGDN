@@ -1,9 +1,10 @@
-const LiveService = () => {
+import React from "react";
+import { View, Text } from "react-native";
+
+export default function LiveService() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Try editing me! 🎉</Text>
+    <View>
+      <Text>LiveService</Text>
     </View>
   );
-};
-
-export default LiveService;
+}
