@@ -6,12 +6,13 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { COLORS, SIZES, FONTS, icons, images } from "../constants";
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   return (
     <SafeAreaView
       style={{
@@ -40,6 +41,7 @@ const Home = () => {
                 alignItems: "center",
                 backgroundColor: COLORS.lightGray,
               }}
+              onPress={() => navigation.navigate("LiveService")}
             >
               <Image
                 source={icons.LiveStream}
@@ -100,6 +102,46 @@ const Home = () => {
           </LinearGradient>
 
           <StatusBar style='dark' />
+        </View>
+        <View
+          style={{
+            flex: 1,
+            height: "100%",
+            backgroundColor: COLORS.primary,
+            marginVertical: SIZES.padding * 2,
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text
+              style={{
+                marginVertical: SIZES.padding,
+                marginHorizontal: SIZES.padding,
+                color: COLORS.white,
+                ...FONTS.h2,
+              }}
+            >
+              History
+            </Text>
+            <TouchableWithoutFeedback
+              onPress={() => navigation.navigate("History")}
+            >
+              <Text
+                style={{
+                  marginVertical: SIZES.padding,
+                  marginHorizontal: SIZES.padding,
+                  color: COLORS.white,
+                  ...FONTS.body2,
+                }}
+              >
+                See All
+              </Text>
+            </TouchableWithoutFeedback>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -5,7 +5,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import DrawerNavigationRoutes from "./navigation/DrawerNavigationRoutes";
 import * as Font from "expo-font";
-import { AppLoading } from "expo-app-loading";
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
 
 const theme = {
   ...DefaultTheme,
