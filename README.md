@@ -1,5 +1,9 @@
 # [RGDN APP](https://danoitech.com)
 
+## install expo cli with NPM
+
+To get started you need to install all dependencies using npm install in the root directory of this project
+
 ## File Structure
 
 Within the download you'll find the following directories and files:
