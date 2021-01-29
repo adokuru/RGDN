@@ -2,7 +2,7 @@
 
 ## install dependencies with NPM
 
-To get started you need to install all dependencies using npm install in the root directory of this project. Make sure you have node install and Expo cli before performing this action
+To get started you need to install all dependencies using npm install in the root directory of this project. Make sure you have node and Expo cli installed on your manchine before performing this action
 
 ## File Structure
 
