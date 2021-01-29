@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   Image,
   TextInput,
   KeyboardAvoidingView,
@@ -14,30 +13,8 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import { COLORS, SIZES, FONTS, icons, images } from "../constants";
 
-const SignUp = ({ navigation }) => {
+const Login = ({ navigation }) => {
   const [showPassword, setShowPassword] = React.useState(false);
-
-  function renderHeader() {
-    return (
-      <TouchableOpacity
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          marginTop: SIZES.padding * 6,
-          paddingHorizontal: SIZES.padding * 2,
-        }}
-        onPress={() => console.log("Sign Up")}
-      >
-        <Text
-          style={{
-            marginLeft: SIZES.padding * 1.5,
-            color: COLORS.black,
-            ...FONTS.h4,
-          }}
-        ></Text>
-      </TouchableOpacity>
-    );
-  }
 
   function renderLogo() {
     return (
@@ -152,23 +129,29 @@ const SignUp = ({ navigation }) => {
     >
       <LinearGradient colors={[COLORS.white, COLORS.white]} style={{ flex: 1 }}>
         <ScrollView>
-          {renderHeader()}
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginTop: SIZES.padding * 6,
+              paddingHorizontal: SIZES.padding * 2,
+            }}
+            onPress={() => navigation.navigate("Login")}
+          ></View>
           {renderLogo()}
           <View style={{ alignItems: "center", Top: 40 }}>
-            <Text style={{ color: COLORS.black, ...FONTS.h2 }}>
+            <Text style={{ color: COLORS.black, ...FONTS.body2 }}>
               Just a step way
             </Text>
           </View>
           {renderForm()}
           {renderButton()}
           <View style={{ alignItems: "center", Top: 40 }}>
-            <Text style={{ color: COLORS.black, ...FONTS.h2 }}>
+            <Text style={{ color: COLORS.black, ...FONTS.body2 }}>
               Don’t have a account?{" "}
-              <TouchableWithoutFeedback
-                onPress={() => navigation.navigate("SignUp")}
-              >
+              <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
                 <Text color={"#032B80"}>Click here</Text>
-              </TouchableWithoutFeedback>
+              </TouchableOpacity>
             </Text>
           </View>
         </ScrollView>
@@ -177,4 +160,4 @@ const SignUp = ({ navigation }) => {
   );
 };
 
-export default SignUp;
+export default Login;

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "RGDN-APP",
-    "slug": "RGDN-APP",
+    "name": "RGDN",
+    "slug": "RGDN",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
@@ -13,13 +13,15 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.danoitech.rgdn",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.danoitech.rgdn",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

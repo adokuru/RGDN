@@ -7,6 +7,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import CustomSidebarMenu from "../constants/CustomSidebarMenu";
 import NavigationDrawerHeader from "../constants/NavigationDrawerHeader";
+import { MaterialIcons } from "@expo/vector-icons";
 
 // Import Screens
 import { Home, Wallet, LiveService, History, FAQ } from "../screens";
@@ -155,11 +156,11 @@ const DrawerNavigatorRoutes = (props) => {
   return (
     <Drawer.Navigator
       drawerContentOptions={{
-        activeTintColor: "#cee1f2",
-        color: "#cee1f2",
-        itemStyle: { marginVertical: 5, color: "white" },
+        activeTintColor: "#032B80",
+        color: "#032B80",
+        itemStyle: { marginVertical: 5, color: "032B80" },
         labelStyle: {
-          color: "#d8d8d8",
+          color: "#032B80",
         },
       }}
       screenOptions={{ headerShown: false }}
@@ -167,27 +168,56 @@ const DrawerNavigatorRoutes = (props) => {
     >
       <Drawer.Screen
         name='Home'
-        options={{ drawerLabel: "Home" }}
+        options={{
+          drawerLabel: "Home",
+          drawerIcon: (config) => (
+            <MaterialIcons name='home' size={24} color='#032B80' />
+          ),
+        }}
         component={HomeStack}
       />
       <Drawer.Screen
         name='Wallet'
-        options={{ drawerLabel: "Wallet" }}
+        options={{
+          drawerLabel: "Wallet",
+          drawerIcon: (config) => (
+            <MaterialIcons
+              name='account-balance-wallet'
+              size={24}
+              color='#032B80'
+            />
+          ),
+        }}
         component={WalletScreenStack}
       />
       <Drawer.Screen
         name='LiveService'
-        options={{ drawerLabel: "LiveService" }}
+        options={{
+          drawerLabel: "LiveService",
+          drawerIcon: (config) => (
+            <MaterialIcons name='live-tv' size={24} color='#032B80' />
+          ),
+        }}
         component={LiveServiceScreenStack}
       />
       <Drawer.Screen
         name='History'
-        options={{ drawerLabel: "History" }}
+        options={{
+          drawerLabel: "History",
+          drawerIcon: (config) => (
+            <MaterialIcons name='history' size={24} color='#032B80' />
+          ),
+        }}
         component={HistoryScreenStack}
       />
       <Drawer.Screen
         name='FAQStack'
-        options={{ drawerLabel: "FAQ Screen" }}
+        options={{
+          drawerLabel: "FAQ Screen",
+          drawerIcon: (config) => (
+            <MaterialIcons name='question-answer' size={24} color='#032B80' />
+          ),
+        }}
         component={FAQScreenStack}
       />
     </Drawer.Navigator>
