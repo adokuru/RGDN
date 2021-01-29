@@ -9,7 +9,7 @@ To get started you need to install all dependencies using npm install in the roo
 Within the download you'll find the following directories and files:
 
 ```
-material-kit-react-native/
+RGDN-APP/
 ├── App.js
 ├── README.md
 ├── app.json
