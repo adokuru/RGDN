@@ -20,7 +20,7 @@ const Login = ({ navigation }) => {
     return (
       <View
         style={{
-          marginTop: SIZES.padding * 5,
+          marginTop: SIZES.padding * 15,
           height: 100,
           alignItems: "center",
           justifyContent: "center",
@@ -107,9 +107,9 @@ const Login = ({ navigation }) => {
       <View style={{ margin: SIZES.padding * 3 }}>
         <TouchableOpacity
           style={{
-            height: 60,
+            height: 45,
             backgroundColor: COLORS.primary,
-            borderRadius: SIZES.radius / 1.5,
+            // borderRadius: SIZES.radius / 1.5,
             alignItems: "center",
             justifyContent: "center",
           }}
