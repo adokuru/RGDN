@@ -15,17 +15,10 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const Home = ({ navigation }) => {
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: COLORS.white,
-        paddingHorizontal: SIZES.padding * 1,
-      }}
-    >
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white, paddingHorizontal: SIZES.padding * 1, }}>
       <ScrollView>
         <View
-          style={{ flexDirection: "row", marginVertical: SIZES.padding * 2 }}
-        >
+          style={{ flexDirection: "row", marginVertical: SIZES.padding * 2 }}>
           <View style={{ flex: 1, left: 20 }}>
             <Text style={{ ...FONTS.h1 }}>Hello!</Text>
             <Text style={{ ...FONTS.h2, color: COLORS.gray }}>
@@ -38,6 +31,7 @@ const Home = ({ navigation }) => {
               style={{
                 height: 40,
                 width: 40,
+                marginEnd: 10,
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: COLORS.white,
@@ -47,8 +41,8 @@ const Home = ({ navigation }) => {
               <Image
                 source={icons.LiveStream}
                 style={{
-                  width: 20,
-                  height: 20,
+                  width: 40,
+                  height: 40,
                   tintColor: COLORS.primary,
                 }}
               />
@@ -58,8 +52,8 @@ const Home = ({ navigation }) => {
         <View>
           <View
             style={{
-              height: 120,
-              borderRadius: 20,
+              height: 130,
+              // borderRadius: 20,
               backgroundColor: COLORS.primary,
             }}
           >
@@ -69,7 +63,7 @@ const Home = ({ navigation }) => {
                 flex: 1,
                 justifyContent: "space-between",
                 flexDirection: "row",
-                borderRadius: 5,
+                // borderRadius: 5,
               }}
             >
               <View>
@@ -111,54 +105,20 @@ const Home = ({ navigation }) => {
             <StatusBar style='dark' />
           </View>
         </View>
-        <View
-          style={{
-            flex: 1,
-            height: "100%",
-            width: "100%",
-            backgroundColor: COLORS.primary,
-            marginVertical: SIZES.padding * 2,
-          }}
-        >
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text
-              style={{
-                marginVertical: SIZES.padding,
-                marginHorizontal: SIZES.padding,
-                color: COLORS.white,
-                ...FONTS.h2,
-              }}
-            >
+        <View style={{ flex: 1, height: "100%", width: "100%", backgroundColor: COLORS.primary, marginVertical: SIZES.padding * .5, }}>
+          <View style={{ width: "100%", flexDirection: "row", justifyContent: "space-between", }}>
+            <Text style={{ marginVertical: SIZES.padding, marginHorizontal: SIZES.padding, color: COLORS.white, ...FONTS.h2, }}>
               History
             </Text>
-            <TouchableWithoutFeedback
-              onPress={() => navigation.navigate("History")}
-            >
-              <Text
-                style={{
-                  marginVertical: SIZES.padding,
-                  marginHorizontal: SIZES.padding,
-                  color: COLORS.white,
-                  ...FONTS.body2,
-                }}
-              >
-                See All
-              </Text>
-            </TouchableWithoutFeedback>
           </View>
           <View>
             <FlatList
               data={[
-                { key: "Devin" },
+                { key: "Iso Solomon .O" },
                 { key: "Dan" },
                 { key: "Dominic" },
                 { key: "Jackson" },
+                { key: "Nuga Nuga .M" },
               ]}
               renderItem={({ item }) => (
                 <View
@@ -168,56 +128,34 @@ const Home = ({ navigation }) => {
                   }}
                 >
                   <View
-                    style={{
-                      marginVertical: SIZES.padding,
-                    }}
-                  >
+                    style={{ marginVertical: SIZES.padding, }} >
                     <Text
-                      style={{
-                        marginHorizontal: SIZES.padding,
-                        color: COLORS.white,
-                        ...FONTS.body3,
-                      }}
-                    >
+                      style={{ marginHorizontal: SIZES.padding, color: COLORS.white, ...FONTS.body3, }} >
                       {item.key}
                     </Text>
-                    <Text
-                      style={{
-                        marginHorizontal: SIZES.padding,
-                        color: COLORS.gray,
-                        ...FONTS.body3,
-                      }}
-                    >
+                    <Text style={{ marginHorizontal: SIZES.padding, color: COLORS.gray, ...FONTS.body3, }}>
                       15 Aug 2020
                     </Text>
                   </View>
                   <View>
-                    <Text
-                      style={{
-                        marginVertical: SIZES.padding,
-                        marginHorizontal: SIZES.padding,
-                        color: COLORS.white,
-                        ...FONTS.body3,
-                      }}
-                    >
-                      ₦12 487.12
+                    <Text style={{ marginVertical: SIZES.padding, marginHorizontal: SIZES.padding, color: COLORS.white, ...FONTS.body3, }} >
+                      ₦900.0
                     </Text>
                   </View>
                 </View>
               )}
             />
           </View>
-          <View style={{ margin: SIZES.padding * 3 }}>
+          <View style={{ margin: SIZES.padding * 2 }}>
             <TouchableOpacity
               style={{
-                height: 60,
+                height: 50,
                 backgroundColor: COLORS.color2,
-                borderRadius: SIZES.radius / 1.5,
+                // borderRadius: SIZES.radius / 1.5,
                 alignItems: "center",
                 justifyContent: "center",
               }}
               onPress={() => navigation.navigate("History")}
-              // onPress={() => navigation.navigate("Home")}
             >
               <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
                 View History

@@ -17,8 +17,8 @@ const NavigationDrawerHeader = (props) => {
         <Image
           source={icons.Menu}
           style={{
-            width: 30,
-            height: 30,
+            width: 40,
+            height: 40,
             marginLeft: 10,
             tintColor: COLORS.primary,
           }}
