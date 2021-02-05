@@ -1,13 +1,6 @@
 import React from "react";
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  KeyboardAvoidingView,
-  ScrollView,
-  Platform,
+  View, Text, TouchableOpacity, Image, TextInput, KeyboardAvoidingView, ScrollView, Platform,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -56,7 +49,8 @@ const Login = ({ navigation }) => {
               color: COLORS.black,
               ...FONTS.body3,
             }}
-            placeholder='Username'
+            onChangeText={userEmail => this.setState({userEmail})}
+            placeholder='Email Address'
             placeholderTextColor={COLORS.black}
             selectionColor={COLORS.black}
           />
@@ -73,6 +67,7 @@ const Login = ({ navigation }) => {
               color: COLORS.black,
               ...FONTS.body3,
             }}
+            onChangeText={userPassword => this.setState({userPassword})}
             placeholder='Enter Password'
             placeholderTextColor={COLORS.black}
             selectionColor={COLORS.black}
@@ -113,8 +108,8 @@ const Login = ({ navigation }) => {
             alignItems: "center",
             justifyContent: "center",
           }}
-          onPress={() => navigation.replace("DrawerNavigationRoutes")}
-          // onPress={() => navigation.navigate("Home")}
+          // onPress={() => navigation.replace("DrawerNavigationRoutes")}
+          onPress={this.loginFunction}
         >
           <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Login</Text>
         </TouchableOpacity>
@@ -159,5 +154,36 @@ const Login = ({ navigation }) => {
     </KeyboardAvoidingView>
   );
 };
+
+loginFunction = () => {
+
+  const { userEmail } = this.state;
+  const { userPassword } = this.state;
+
+
+  fetch('https://rgdn.org/api/loginAccount.phpv', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+
+      emailMobile: userEmail,
+
+      password: userPassword
+
+    })
+
+  }).then((response) => response.json())
+    .then((responseJson) => {
+
+      Alert.alert(responseJson);
+
+    }).catch((error) => {
+      console.error(error);
+    });
+
+}
 
 export default Login;
