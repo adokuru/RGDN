@@ -1,85 +1,221 @@
 import React from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Image,
+  TextInput,
+  KeyboardAvoidingView,
+  ScrollView,
+  Platform,
+  SafeAreaView,
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
-import { Login, SignUp } from "./screens";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
-import DrawerNavigationRoutes from "./navigation/DrawerNavigationRoutes";
-import AppLoading from "expo-app-loading";
+import { COLORS, SIZES, FONTS, icons, images } from "../constants";
+import { Input, Block } from "galio-framework";
 
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    border: "transparent",
-  },
-};
+const SignUp = ({ navigation }) => {
+  const [showPassword, setShowPassword] = React.useState(false);
 
-const Stack = createStackNavigator();
-const getFonts = {
-  "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
-  "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
-  "Roboto-Black": require("./assets/fonts/Roboto-Black.ttf"),
-};
-const Auth = () => {
-  // Stack Navigator for Login and Sign up Screen
+  function renderLogo() {
+    return (
+      <View>
+        <View
+          style={{
+            height: 120,
+            borderRadius: 20,
+            backgroundColor: COLORS.primary,
+          }}
+        >
+          <LinearGradient
+            colors={[COLORS.color1, COLORS.color2]}
+            style={{
+              flex: 1,
+              justifyContent: "space-between",
+              flexDirection: "row",
+              borderRadius: 5,
+            }}
+          >
+            <View>
+              <Text
+                style={{
+                  marginHorizontal: SIZES.padding,
+                  marginVertical: SIZES.padding,
+
+                  color: COLORS.white,
+                  ...FONTS.h1,
+                }}
+              >
+                WALLET
+              </Text>
+            </View>
+            <View
+              style={{
+                marginVertical: SIZES.padding * 3,
+              }}
+            >
+              <Text
+                style={{
+                  marginHorizontal: SIZES.padding,
+                  marginVertical: SIZES.padding,
+
+                  color: COLORS.white,
+                  ...FONTS.body3,
+                }}
+              >
+                Available Balance
+              </Text>
+              <Text
+                style={{
+                  marginHorizontal: SIZES.padding,
+                  color: COLORS.white,
+                  ...FONTS.h2,
+                }}
+              >
+                ₦12 487.12
+              </Text>
+            </View>
+          </LinearGradient>
+        </View>
+      </View>
+    );
+  }
+
+  function renderForm() {
+    return (
+      <View>
+        {/* Account Name */}
+        <View>
+          <Input
+            style={{
+              color: COLORS.black,
+              ...FONTS.body3,
+            }}
+            rounded
+            label='Account Name'
+          />
+        </View>
+
+        {/* Account Number */}
+        <View>
+          <Input
+            style={{
+              color: COLORS.black,
+              ...FONTS.body3,
+            }}
+            type='numeric'
+            rounded
+            label='Account Number'
+          />
+        </View>
+        {/*  */}
+        <View>
+          <Input
+            style={{
+              color: COLORS.black,
+              ...FONTS.body3,
+            }}
+            type='numeric'
+            rounded
+            label='Bank'
+          />
+        </View>
+      </View>
+    );
+  }
+
+  function renderButton() {
+    return (
+      <View style={{ margin: SIZES.padding * 3 }}>
+        <TouchableOpacity
+          style={{
+            height: 60,
+            backgroundColor: COLORS.primary,
+            borderRadius: SIZES.radius / 1.5,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onPress={() => navigation.replace("DrawerNavigationRoutes")}
+          // onPress={() => navigation.navigate("Home")}
+        >
+          <Text style={{ color: COLORS.white, ...FONTS.h3 }}>WITHDRAW</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   return (
-    <Stack.Navigator initialRouteName='Login'>
-      <Stack.Screen
-        name='Login'
-        component={Login}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name='SignUp'
-        component={SignUp}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : null}
+      style={{ flex: 1 }}
+    >
+      <SafeAreaView
+        style={{
+          flex: 1,
+          backgroundColor: COLORS.white,
+          paddingHorizontal: SIZES.padding * 1,
+        }}
+      >
+        <View
+          style={{ flexDirection: "row", marginVertical: SIZES.padding * 2 }}
+        >
+          <View style={{ flex: 1, left: 20 }}>
+            <Text style={{ ...FONTS.h1 }}>Hello!</Text>
+            <Text style={{ ...FONTS.h2, color: COLORS.gray }}>
+              David Adokuru
+            </Text>
+          </View>
+
+          <View style={{ alignItems: "center", justifyContent: "center" }}>
+            <TouchableOpacity
+              style={{
+                height: 40,
+                width: 40,
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: COLORS.white,
+              }}
+              onPress={() => navigation.navigate("LiveService")}
+            >
+              <Image
+                source={icons.LiveStream}
+                style={{
+                  width: 20,
+                  height: 20,
+                  tintColor: COLORS.primary,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View></View>
+        <LinearGradient
+          colors={[COLORS.white, COLORS.white]}
+          style={{ flex: 1 }}
+        >
+          <ScrollView>
+            {renderLogo()}
+            <View style={{ Top: 40 }}>
+              <Text
+                style={{
+                  color: COLORS.black,
+                  fontWeight: "normal",
+                  marginVertical: SIZES.padding,
+                  ...FONTS.h1,
+                }}
+              >
+                Withdrawal
+              </Text>
+            </View>
+            {renderForm()}
+            {renderButton()}
+          </ScrollView>
+        </LinearGradient>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
-export default class App extends React.Component {
-  state = {
-    fontsLoaded: false,
-  };
 
-  async _loadFontsAsync() {
-    await Font.loadAsync(getFonts);
-    this.setState({ fontsLoaded: true });
-  }
-
-  componentDidMount() {
-    this._loadFontsAsync();
-  }
-
-  render() {
-    if (this.state.fontsLoaded) {
-      return (
-        <NavigationContainer theme={theme}>
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}
-            initialRouteName={"Login"}
-          >
-            {/* Auth Navigator which includer Login Signup will come once */}
-            <Stack.Screen
-              name='Auth'
-              component={Auth}
-              options={{ headerShown: false }}
-            />
-
-            {/* Drawer Navigation */}
-            <Stack.Screen
-              name='DrawerNavigationRoutes'
-              component={DrawerNavigationRoutes}
-              // Hiding header for Navigation Drawer as we will use our custom header
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      );
-    } else {
-      return <AppLoading />;
-    }
-  }
-}
+export default SignUp;

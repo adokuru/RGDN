@@ -1,39 +1,67 @@
-import React from "react";
-import { View, Text, TouchableOpacity, Image, TextInput, KeyboardAvoidingView, ScrollView, Platform, } from "react-native";
+import React, { useState, createRef } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  KeyboardAvoidingView,
+  ScrollView,
+  Platform,
+  Keyboard,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { COLORS, SIZES, FONTS, icons, images } from "../constants";
+import AsyncStorage from "@react-native-community/async-storage";
 
-// loginFunction = () => {
-
-//   const { userEmail } = this.state;
-//   const { userPassword } = this.state;
-
-//   fetch('https://rgdn.org/api/loginAccount.php', {
-//     method: 'POST',
-//     headers: {
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-
-//       emailMobile: userEmail,
-
-//       password: userPassword
-
-//     })
-//   }).then((response) => response.json())
-//     .then((responseJson) => {
-
-//       Alert.alert(responseJson);
-
-//     }).catch((error) => {
-//       console.error(error);
-//     });
-// }
-
+import Loader from "../constants/Loader";
 
 const Login = ({ navigation }) => {
-  const [showPassword, setShowPassword] = React.useState(false);//meaning ?
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errortext, setErrortext] = useState("");
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const passwordInputRef = createRef();
+
+  const handleSubmitPress = () => {
+    setErrortext("");
+    if (!userEmail) {
+      alert("Please fill Email");
+      return;
+    }
+    if (!userPassword) {
+      alert("Please fill Password");
+      return;
+    }
+    setLoading(true);
+    let formBody = {
+      emailMobile: userEmail,
+      password: userPassword,
+    };
+
+    fetch("https://rgdn.org/api/loginAccount.php", {
+      method: "POST",
+      body: formBody,
+      headers: {
+        //Header Defination
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        //Hide Loader
+        setLoading(false);
+        console.log(responseJson);
+        // If server response message same as Data Matched
+      })
+      .catch((error) => {
+        //Hide Loader
+        setLoading(false);
+        console.error(error);
+      });
+  };
 
   function renderLogo() {
     return (
@@ -75,7 +103,15 @@ const Login = ({ navigation }) => {
               color: COLORS.black,
               ...FONTS.body3,
             }}
-            // onChangeText={userEmail => this.setState({ userEmail })}
+            onChangeText={(UserEmail) => setUserEmail(UserEmail)}
+            autoCapitalize='none'
+            keyboardType='email-address'
+            returnKeyType='next'
+            onSubmitEditing={() =>
+              passwordInputRef.current && passwordInputRef.current.focus()
+            }
+            underlineColorAndroid='#f000'
+            blurOnSubmit={false}
             placeholder='Email Address'
             placeholderTextColor={COLORS.black}
             selectionColor={COLORS.black}
@@ -93,9 +129,17 @@ const Login = ({ navigation }) => {
               color: COLORS.black,
               ...FONTS.body3,
             }}
-            // onChangeText={userPassword => this.setState({ userPassword })}
-            placeholder='Enter Password'
+            onChangeText={(UserPassword) => setUserPassword(UserPassword)}
+            placeholder='Enter Password' //12345
             placeholderTextColor={COLORS.black}
+            keyboardType='default'
+            ref={passwordInputRef}
+            onSubmitEditing={Keyboard.dismiss}
+            blurOnSubmit={false}
+            secureTextEntry={true}
+            underlineColorAndroid='#f000'
+            returnKeyType='next'
+            // onChangeText={userPassword => this.setState({ userPassword })}
             selectionColor={COLORS.black}
             secureTextEntry={!showPassword}
           />
@@ -134,7 +178,7 @@ const Login = ({ navigation }) => {
             alignItems: "center",
             justifyContent: "center",
           }}
-          onPress={() => navigation.replace("DrawerNavigationRoutes")}
+          onPress={handleSubmitPress}
           // onPress={this.loginFunction}
         >
           <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Login</Text>
@@ -148,6 +192,7 @@ const Login = ({ navigation }) => {
       behavior={Platform.OS === "ios" ? "padding" : null}
       style={{ flex: 1 }}
     >
+      <Loader loading={loading} />
       <LinearGradient colors={[COLORS.white, COLORS.white]} style={{ flex: 1 }}>
         <ScrollView>
           <View
@@ -167,11 +212,16 @@ const Login = ({ navigation }) => {
           </View>
           {renderForm()}
           {renderButton()}
+          {errortext != "" ? (
+            <Text style={styles.errorTextStyle}>{errortext}</Text>
+          ) : null}
           <View style={{ alignItems: "center", Top: 40 }}>
             <Text style={{ color: COLORS.black, ...FONTS.body2 }}>
               Don’t have a account?{" "}
               <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
-                <Text color={"#032B80"}>Click here</Text>
+                <Text style={{ color: COLORS.primary, ...FONTS.body2 }}>
+                  Click here
+                </Text>
               </TouchableOpacity>
             </Text>
           </View>

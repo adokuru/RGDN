@@ -10,14 +10,17 @@ import NavigationDrawerHeader from "../constants/NavigationDrawerHeader";
 import { MaterialIcons } from "@expo/vector-icons";
 
 // Import Screens
-import { Home, Wallet, LiveService, History, FAQ } from "../screens";
+import { Home, Wallet, LiveService, History, FAQ, Copies } from "../screens";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const HomeStack = ({ navigation }) => {
   return (
-    <Stack.Navigator initialRouteName='Home'>
+    <Stack.Navigator
+      initialRouteName='Home'
+      screenOptions={{ headerShown: false }}
+    >
       <Stack.Screen
         name='Home'
         component={Home}
@@ -43,19 +46,7 @@ const WalletScreenStack = ({ navigation }) => {
   return (
     <Stack.Navigator
       initialRouteName='Wallet'
-      screenOptions={{
-        title: "Home", //Set Header Title
-        headerLeft: () => (
-          <NavigationDrawerHeader navigationProps={navigation} />
-        ),
-        headerStyle: {
-          backgroundColor: "#fff", //Set Header color
-        },
-        headerTintColor: "#111", //Set Header text color
-        headerTitleStyle: {
-          fontWeight: "bold", //Set Header text style
-        },
-      }}
+      screenOptions={{ headerShown: false }}
     >
       <Stack.Screen
         name='Wallet'
@@ -67,23 +58,27 @@ const WalletScreenStack = ({ navigation }) => {
     </Stack.Navigator>
   );
 };
+const CopiesScreenStack = ({ navigation }) => {
+  return (
+    <Stack.Navigator
+      initialRouteName='Copies'
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen
+        name='Copies'
+        component={Copies}
+        options={{
+          title: "Copies", //Set Header Title
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
 const HistoryScreenStack = ({ navigation }) => {
   return (
     <Stack.Navigator
       initialRouteName='History'
-      screenOptions={{
-        title: "History", //Set Header Title
-        headerLeft: () => (
-          <NavigationDrawerHeader navigationProps={navigation} />
-        ),
-        headerStyle: {
-          backgroundColor: "#fff", //Set Header color
-        },
-        headerTintColor: "#111", //Set Header text color
-        headerTitleStyle: {
-          fontWeight: "bold", //Set Header text style
-        },
-      }}
+      screenOptions={{ headerShown: false }}
     >
       <Stack.Screen
         name='History'
@@ -99,19 +94,7 @@ const LiveServiceScreenStack = ({ navigation }) => {
   return (
     <Stack.Navigator
       initialRouteName='LiveService'
-      screenOptions={{
-        title: "LiveService", //Set Header Title
-        headerLeft: () => (
-          <NavigationDrawerHeader navigationProps={navigation} />
-        ),
-        headerStyle: {
-          backgroundColor: "#fff", //Set Header color
-        },
-        headerTintColor: "#111", //Set Header text color
-        headerTitleStyle: {
-          fontWeight: "bold", //Set Header text style
-        },
-      }}
+      screenOptions={{ headerShown: false }}
     >
       <Stack.Screen
         name='LiveService'
@@ -189,6 +172,20 @@ const DrawerNavigatorRoutes = (props) => {
           ),
         }}
         component={WalletScreenStack}
+      />
+      <Drawer.Screen
+        name='Copies'
+        options={{
+          drawerLabel: "Copies",
+          drawerIcon: (config) => (
+            <MaterialIcons
+              name='account-balance-wallet'
+              size={24}
+              color='#032B80'
+            />
+          ),
+        }}
+        component={CopiesScreenStack}
       />
       <Drawer.Screen
         name='LiveService'

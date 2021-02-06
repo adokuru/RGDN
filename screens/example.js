@@ -159,3 +159,69 @@ const Home = ({ navigation }) => {
   );
 };
 export default Home;
+
+
+
+
+
+
+
+
+<View style={{ flex: 1, height: "100%", width: "100%", backgroundColor: COLORS.primary, marginVertical: SIZES.padding * .5, }}>
+<View style={{ width: "100%", flexDirection: "row", justifyContent: "space-between", }}>
+  <Text style={{ marginVertical: SIZES.padding, marginHorizontal: SIZES.padding, color: COLORS.white, ...FONTS.h2, }}>
+    History
+  </Text>
+</View>
+<View>
+  <FlatList
+    data={[
+      { key: "Iso Solomon .O" },
+      { key: "Dan" },
+      { key: "Dominic" },
+      { key: "Jackson" },
+      { key: "Nuga Nuga .M" },
+    ]}
+    renderItem={({ item }) => (
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <View
+          style={{ marginVertical: SIZES.padding, }} >
+          <Text
+            style={{ marginHorizontal: SIZES.padding, color: COLORS.white, ...FONTS.body3, }} >
+            {item.key}
+          </Text>
+          <Text style={{ marginHorizontal: SIZES.padding, color: COLORS.gray, ...FONTS.body3, }}>
+            15 Aug 2020
+          </Text>
+        </View>
+        <View>
+          <Text style={{ marginVertical: SIZES.padding, marginHorizontal: SIZES.padding, color: COLORS.white, ...FONTS.body3, }} >
+            ₦900.0
+          </Text>
+        </View>
+      </View>
+    )}
+  />
+</View>
+<View style={{ margin: SIZES.padding * 2 }}>
+  <TouchableOpacity
+    style={{
+      height: 50,
+      backgroundColor: COLORS.color2,
+      // borderRadius: SIZES.radius / 1.5,
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+    onPress={() => navigation.navigate("History")}
+  >
+    <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
+      View History
+    </Text>
+  </TouchableOpacity>
+</View>
+</View>

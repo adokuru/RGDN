@@ -5,5 +5,6 @@ import Wallet from "./Wallet";
 import LiveService from "./LiveService";
 import History from "./History";
 import FAQ from "./FAQ";
+import Copies from "./Copies";
 
-export { Home, SignUp, Login, Wallet, LiveService, History, FAQ };
+export { Copies, Home, SignUp, Login, Wallet, LiveService, History, FAQ };

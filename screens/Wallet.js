@@ -1,221 +1,202 @@
 import React from "react";
 import {
   View,
-  Text,
-  TouchableOpacity,
   TouchableWithoutFeedback,
+  TouchableOpacity,
   Image,
-  TextInput,
-  KeyboardAvoidingView,
-  ScrollView,
-  Platform,
-  SafeAreaView,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import styled from "styled-components";
 
-import { COLORS, SIZES, FONTS, icons, images } from "../constants";
-import { Input, Block } from "galio-framework";
+import { COLORS, FONTS, icons, SIZES } from "../constants";
+import Text from "../constants/Text";
+import purchaseData from "../purchases";
 
-const SignUp = ({ navigation }) => {
-  const [showPassword, setShowPassword] = React.useState(false);
+export default Home = ({ navigation }) => {
+  const toggleDrawer = () => {
+    navigation.toggleDrawer();
+  };
 
-  function renderLogo() {
-    return (
-      <View>
-        <View
-          style={{
-            height: 120,
-            borderRadius: 20,
-            backgroundColor: COLORS.primary,
-          }}
-        >
-          <LinearGradient
-            colors={[COLORS.color1, COLORS.color2]}
-            style={{
-              flex: 1,
-              justifyContent: "space-between",
-              flexDirection: "row",
-              borderRadius: 5,
-            }}
-          >
-            <View>
-              <Text
-                style={{
-                  marginHorizontal: SIZES.padding,
-                  marginVertical: SIZES.padding,
-
-                  color: COLORS.white,
-                  ...FONTS.h1,
-                }}
-              >
-                WALLET
-              </Text>
-            </View>
-            <View
-              style={{
-                marginVertical: SIZES.padding * 3,
-              }}
-            >
-              <Text
-                style={{
-                  marginHorizontal: SIZES.padding,
-                  marginVertical: SIZES.padding,
-
-                  color: COLORS.white,
-                  ...FONTS.body3,
-                }}
-              >
-                Available Balance
-              </Text>
-              <Text
-                style={{
-                  marginHorizontal: SIZES.padding,
-                  color: COLORS.white,
-                  ...FONTS.h2,
-                }}
-              >
-                ₦12 487.12
-              </Text>
-            </View>
-          </LinearGradient>
-        </View>
-      </View>
-    );
-  }
-
-  function renderForm() {
-    return (
-      <View>
-        {/* Account Name */}
-        <View>
-          <Input
-            style={{
-              color: COLORS.black,
-              ...FONTS.body3,
-            }}
-            rounded
-            label='Account Name'
-          />
-        </View>
-
-        {/* Account Number */}
-        <View>
-          <Input
-            style={{
-              color: COLORS.black,
-              ...FONTS.body3,
-            }}
-            type='numeric'
-            rounded
-            label='Account Number'
-          />
-        </View>
-        {/*  */}
-        <View>
-          <Input
-            style={{
-              color: COLORS.black,
-              ...FONTS.body3,
-            }}
-            type='numeric'
-            rounded
-            label='Bank'
-          />
-        </View>
-      </View>
-    );
-  }
-
-  function renderButton() {
-    return (
-      <View style={{ margin: SIZES.padding * 3 }}>
-        <TouchableOpacity
-          style={{
-            height: 60,
-            backgroundColor: COLORS.primary,
-            borderRadius: SIZES.radius / 1.5,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onPress={() => navigation.replace("DrawerNavigationRoutes")}
-          // onPress={() => navigation.navigate("Home")}
-        >
-          <Text style={{ color: COLORS.white, ...FONTS.h3 }}>WITHDRAW</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
+  const renderPurchase = ({ item }) => (
+    <Purchase>
+      <PurchaseInfo>
+        <Text heavy>{item.product}</Text>
+        <Text bold margin='2px 0 2px 0'>
+          {item.store}
+        </Text>
+        <Text small color='#111111'>
+          {item.address}
+        </Text>
+      </PurchaseInfo>
+      <Text heavy>{item.price}</Text>
+    </Purchase>
+  );
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : null}
-      style={{ flex: 1 }}
-    >
-      <SafeAreaView
+    <Container>
+      <Header>
+        <TouchableOpacity onPress={toggleDrawer}>
+          <ProfilePhoto
+            source={{
+              uri:
+                "https://ui-avatars.com/api/?background=FFFFFF&color=000&name=David+Adokuru",
+            }}
+          />
+        </TouchableOpacity>
+        <Welcome>
+          <Text
+            style={{
+              ...FONTS.body3,
+              color: COLORS.white,
+            }}
+          >
+            Welcome,
+          </Text>
+          <Text
+            style={{
+              ...FONTS.body3,
+              color: COLORS.white,
+            }}
+          >
+            David Adokuru
+          </Text>
+        </Welcome>
+        <View style={{ alignItems: "center", justifyContent: "center" }}>
+          <TouchableOpacity
+            style={{
+              height: 40,
+              width: 40,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onPress={() => navigation.navigate("LiveService")}
+          >
+            <Image
+              source={icons.LiveStream}
+              style={{
+                width: 20,
+                height: 20,
+                tintColor: COLORS.white,
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+      </Header>
+
+      <Text
+        center
+        title
+        black
         style={{
-          flex: 1,
-          backgroundColor: COLORS.white,
-          paddingHorizontal: SIZES.padding * 1,
+          color: COLORS.white,
+          marginBottom: SIZES.padding,
         }}
       >
-        <View
-          style={{ flexDirection: "row", marginVertical: SIZES.padding * 2 }}
-        >
-          <View style={{ flex: 1, left: 20 }}>
-            <Text style={{ ...FONTS.h1 }}>Hello!</Text>
-            <Text style={{ ...FONTS.h2, color: COLORS.gray }}>
-              David Adokuru
-            </Text>
-          </View>
+        ₦12 487.12
+      </Text>
+      <Text
+        center
+        heavy
+        color='#fff'
+        style={{ marginBottom: SIZES.padding * 2 }}
+      >
+        Earnings
+      </Text>
 
-          <View style={{ alignItems: "center", justifyContent: "center" }}>
-            <TouchableOpacity
-              style={{
-                height: 40,
-                width: 40,
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: COLORS.white,
-              }}
-              onPress={() => navigation.navigate("LiveService")}
-            >
-              <Image
-                source={icons.LiveStream}
-                style={{
-                  width: 20,
-                  height: 20,
-                  tintColor: COLORS.primary,
-                }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View></View>
-        <LinearGradient
-          colors={[COLORS.white, COLORS.white]}
-          style={{ flex: 1 }}
-        >
-          <ScrollView>
-            {renderLogo()}
-            <View style={{ Top: 40 }}>
-              <Text
-                style={{
-                  color: COLORS.black,
-                  fontWeight: "normal",
-                  marginVertical: SIZES.padding,
-                  ...FONTS.h1,
-                }}
+      <Purchases
+        ListHeaderComponent={
+          <>
+            <TransactionsHeader>
+              <Text style={{ ...FONTS.h3, color: COLORS.black }}>History</Text>
+              <TouchableWithoutFeedback
+                onPress={() => navigation.navigate("History")}
               >
-                Withdrawal
-              </Text>
-            </View>
-            {renderForm()}
-            {renderButton()}
-          </ScrollView>
-        </LinearGradient>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+                <Text
+                  style={{
+                    marginVertical: SIZES.padding,
+                    marginHorizontal: SIZES.padding,
+                    color: COLORS.black,
+                    ...FONTS.body4,
+                  }}
+                >
+                  See All
+                </Text>
+              </TouchableWithoutFeedback>
+            </TransactionsHeader>
+
+            <SearchContainer></SearchContainer>
+          </>
+        }
+        data={purchaseData}
+        renderItem={renderPurchase}
+        showsVerticalScrollIndicator={false}
+      />
+      <StatusBar barStyle='light-content' />
+    </Container>
   );
 };
 
-export default SignUp;
+const Container = styled.SafeAreaView`
+  flex: 1;
+  background-color: #032b80;
+`;
+
+const Header = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin: 16px 16px 32px 16px;
+`;
+
+const ProfilePhoto = styled.Image`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+`;
+
+const Welcome = styled.View`
+  flex: 1;
+  padding: 0 16px;
+`;
+
+const Chart = styled.View`
+  margin: 32px 0;
+`;
+
+const Purchases = styled.FlatList`
+  background-color: #fff;
+  padding: 16px;
+`;
+
+const TransactionsHeader = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const SearchContainer = styled.View`
+  background-color: #111;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 8px;
+  border-radius: 6px;
+  margin: 16px 0;
+`;
+
+const Search = styled.TextInput`
+  flex: 1;
+  padding: 8px 16px;
+  font-family: "Avenir";
+  color: #111111;
+`;
+
+const Purchase = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom-width: 1px;
+  border-bottom-color: #111111;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+`;
+
+const PurchaseInfo = styled.View``;
+
+const StatusBar = styled.StatusBar``;
