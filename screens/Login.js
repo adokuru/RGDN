@@ -36,30 +36,40 @@ const Login = ({ navigation }) => {
       return;
     }
     setLoading(true);
-    let formBody = {
-      emailMobile: userEmail,
-      password: userPassword,
-    };
 
     fetch("https://rgdn.org/api/loginAccount.php", {
       method: "POST",
-      body: formBody,
+      body: JSON.stringify({
+        emailMobile: userEmail,
+
+        password: userPassword,
+      }),
       headers: {
         //Header Defination
-        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
       .then((responseJson) => {
         //Hide Loader
         setLoading(false);
-        console.log(responseJson);
+        let user = responseJson.userData[0];
         // If server response message same as Data Matched
+        if (responseJson.success === "200") {
+          AsyncStorage.setItem("user_id", user.clientID);
+          AsyncStorage.setItem("earnings", user.earnings);
+          AsyncStorage.setItem("name", user.name);
+          AsyncStorage.setItem("mobile", user.mobile);
+          AsyncStorage.setItem("email", user.email);
+          navigation.replace("DrawerNavigationRoutes");
+        } else {
+          setErrortext(responseJson.message);
+        }
       })
       .catch((error) => {
         //Hide Loader
         setLoading(false);
-        console.error(error);
       });
   };
 
@@ -213,7 +223,15 @@ const Login = ({ navigation }) => {
           {renderForm()}
           {renderButton()}
           {errortext != "" ? (
-            <Text style={styles.errorTextStyle}>{errortext}</Text>
+            <Text
+              style={{
+                color: "red",
+                textAlign: "center",
+                ...FONTS.h2,
+              }}
+            >
+              {errortext}
+            </Text>
           ) : null}
           <View style={{ alignItems: "center", Top: 40 }}>
             <Text style={{ color: COLORS.black, ...FONTS.body2 }}>

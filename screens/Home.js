@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   TouchableWithoutFeedback,
@@ -6,18 +6,52 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import styled from "styled-components";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import Text from "../constants/Text";
 import purchaseData from "../purchases";
+
 export default Home = ({ navigation }) => {
+  const [name, setname] = useState("");
+  const [user_id, setuser_id] = useState("");
+  const [earnings, setearnings] = useState("");
+  const [email, setemail] = useState("");
+  const [mobile, setmobile] = useState("");
+
   const toggleDrawer = () => {
     navigation.toggleDrawer();
   };
+
+  const readData = async () => {
+    try {
+      const name = await AsyncStorage.getItem("name");
+      const user_id = await AsyncStorage.getItem("user_id");
+      const earnings = await AsyncStorage.getItem("earnings");
+      const mobile = await AsyncStorage.getItem("mobile");
+      const email = await AsyncStorage.getItem("email");
+
+      if (name !== null) {
+        // We have data!!
+        setname(name);
+        setuser_id(user_id);
+        setearnings(earnings);
+        setmobile(mobile);
+        setemail(email);
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  };
+
   const clickHandler = () => {
     //function to handle click on floating Action Button
     alert("Floating Button Clicked");
   };
+
+  useEffect(() => {
+    readData();
+  }, []);
 
   const renderPurchase = ({ item }) => (
     <Purchase>
@@ -60,7 +94,7 @@ export default Home = ({ navigation }) => {
               color: COLORS.white,
             }}
           >
-            David Adokuru
+            {{ name }}
           </Text>
         </Welcome>
         <View style={{ alignItems: "center", justifyContent: "center" }}>
