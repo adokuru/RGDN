@@ -3,34 +3,125 @@ import {
   View,
   TouchableWithoutFeedback,
   TouchableOpacity,
+  KeyboardAvoidingView,
   Image,
+  ScrollView,
 } from "react-native";
 import styled from "styled-components";
-
+import { LinearGradient } from "expo-linear-gradient";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import Text from "../constants/Text";
-import purchaseData from "../purchases";
+import { Input, Block } from "galio-framework";
+import DropDownPicker from "react-native-dropdown-picker";
 
-export default Home = ({ navigation }) => {
+export default function Wallet({ navigation }) {
+  const [banks, setBanks] = React.useState([]);
+  const [bank, setBank] = React.useState("");
+  React.useEffect(() => {
+    fetch("https://api.paystack.co/bank", {
+      headers: {
+        Authorization: "sk_test_e9fb5e05e874d6df6da7625b0c9ca42394a12e52",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        let BankData = data.data.map((item) => {
+          return {
+            currency: item.currency,
+            label: item.name,
+            value: item.name,
+            key: item.code,
+            slug: item.slug,
+          };
+        });
+        setBanks(BankData);
+      });
+  }, []);
+
   const toggleDrawer = () => {
     navigation.toggleDrawer();
   };
+  function renderForm() {
+    return (
+      <View>
+        <View style={{ Top: 40, zIndex: 99999 }}>
+          <DropDownPicker
+            items={banks}
+            label='Bank'
+            placeholder='Select a Bank'
+            onChangeItem={(item) => console.log(item.key, item.value)}
+            containerStyle={{
+              marginTop: "5%",
+              height: 50,
+              flex: 1,
+            }}
+            style={{
+              backgroundColor: "#ffffff",
+              color: "#111111",
+              borderRadius: SIZES.radius / 1.5,
+              justifyContent: "flex-start",
+            }}
+            dropDownMaxHeight={100}
+            itemStyle={{
+              justifyContent: "flex-start",
+            }}
+            dropDownStyle={{ backgroundColor: "#fafafa" }}
+          />
+        </View>
+        <View>
+          <Input
+            style={{
+              color: COLORS.black,
+              ...FONTS.body3,
+            }}
+            label='Account Name'
+          />
+        </View>
 
-  const renderPurchase = ({ item }) => (
-    <Purchase>
-      <PurchaseInfo>
-        <Text heavy>{item.product}</Text>
-        <Text bold margin='2px 0 2px 0'>
-          {item.store}
-        </Text>
-        <Text small color='#111111'>
-          {item.address}
-        </Text>
-      </PurchaseInfo>
-      <Text heavy>{item.price}</Text>
-    </Purchase>
-  );
+        {/* Account Number */}
+        <View>
+          <Input
+            style={{
+              color: COLORS.black,
+              ...FONTS.body3,
+            }}
+            type='numeric'
+            label='Account Number'
+          />
+        </View>
 
+        <View>
+          <Input
+            style={{
+              color: COLORS.black,
+              ...FONTS.body3,
+            }}
+            type='numeric'
+            label='Amount'
+          />
+        </View>
+      </View>
+    );
+  }
+  function renderButton() {
+    return (
+      <View style={{ margin: SIZES.padding * 1 }}>
+        <TouchableOpacity
+          style={{
+            height: 50,
+            backgroundColor: COLORS.primary,
+            borderRadius: SIZES.radius / 1.5,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onPress={() => navigation.replace("DrawerNavigationRoutes")}
+          // onPress={() => navigation.navigate("Home")}
+        >
+          <Text style={{ color: COLORS.white, ...FONTS.h4 }}>WITHDRAW</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
   return (
     <Container>
       <Header>
@@ -49,15 +140,7 @@ export default Home = ({ navigation }) => {
               color: COLORS.white,
             }}
           >
-            Welcome,
-          </Text>
-          <Text
-            style={{
-              ...FONTS.body3,
-              color: COLORS.white,
-            }}
-          >
-            David Adokuru
+            Wallet
           </Text>
         </Welcome>
         <View style={{ alignItems: "center", justifyContent: "center" }}>
@@ -102,38 +185,39 @@ export default Home = ({ navigation }) => {
         Earnings
       </Text>
 
-      <Purchases
-        ListHeaderComponent={
-          <>
-            <TransactionsHeader>
-              <Text style={{ ...FONTS.h3, color: COLORS.black }}>History</Text>
-              <TouchableWithoutFeedback
-                onPress={() => navigation.navigate("History")}
+      <LinearGradient colors={[COLORS.white, COLORS.white]} style={{ flex: 1 }}>
+        <View
+          style={{
+            marginHorizontal: SIZES.padding,
+            marginVertical: SIZES.padding * 2,
+            backgroundColor: COLORS.white,
+          }}
+        >
+          <ScrollView>
+            <View style={{ Top: 40 }}>
+              <Text
+                style={{
+                  color: COLORS.black,
+                  fontWeight: "normal",
+                  marginVertical: SIZES.padding,
+                  ...FONTS.h2,
+                }}
               >
-                <Text
-                  style={{
-                    marginVertical: SIZES.padding,
-                    marginHorizontal: SIZES.padding,
-                    color: COLORS.black,
-                    ...FONTS.body4,
-                  }}
-                >
-                  See All
-                </Text>
-              </TouchableWithoutFeedback>
-            </TransactionsHeader>
+                Withdrawal
+              </Text>
+            </View>
+            <KeyboardAvoidingView>
+              {renderForm()}
+              {renderButton()}
+            </KeyboardAvoidingView>
+          </ScrollView>
+        </View>
+      </LinearGradient>
 
-            <SearchContainer></SearchContainer>
-          </>
-        }
-        data={purchaseData}
-        renderItem={renderPurchase}
-        showsVerticalScrollIndicator={false}
-      />
       <StatusBar barStyle='light-content' />
     </Container>
   );
-};
+}
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -155,46 +239,6 @@ const ProfilePhoto = styled.Image`
 const Welcome = styled.View`
   flex: 1;
   padding: 0 16px;
-`;
-
-const Chart = styled.View`
-  margin: 32px 0;
-`;
-
-const Purchases = styled.FlatList`
-  background-color: #fff;
-  padding: 16px;
-`;
-
-const TransactionsHeader = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const SearchContainer = styled.View`
-  background-color: #111;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 8px;
-  border-radius: 6px;
-  margin: 16px 0;
-`;
-
-const Search = styled.TextInput`
-  flex: 1;
-  padding: 8px 16px;
-  font-family: "Avenir";
-  color: #111111;
-`;
-
-const Purchase = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  border-bottom-width: 1px;
-  border-bottom-color: #111111;
-  padding-bottom: 12px;
-  margin-bottom: 12px;
 `;
 
 const PurchaseInfo = styled.View``;

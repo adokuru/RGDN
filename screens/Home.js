@@ -13,55 +13,29 @@ import Text from "../constants/Text";
 import purchaseData from "../purchases";
 
 export default Home = ({ navigation }) => {
-  const [name, setname] = useState("");
-  const [user_id, setuser_id] = useState("");
-  const [earnings, setearnings] = useState("");
-  const [email, setemail] = useState("");
-  const [mobile, setmobile] = useState("");
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setAnimating(false);
+  //     //Check if user_id is set or not
+  //     //If not then send for Authentication
+  //     //else send to Home Screen
+  //     AsyncStorage.getItem("user_id").then((value) =>
+  //       navigation.replace(value === null ? "Auth" : "DrawerNavigationRoutes")
+  //     );
+  //   }, 5000);
+  // }, []);
 
   const toggleDrawer = () => {
     navigation.toggleDrawer();
   };
 
-  const readData = async () => {
-    try {
-      const name = await AsyncStorage.getItem("name");
-      const user_id = await AsyncStorage.getItem("user_id");
-      const earnings = await AsyncStorage.getItem("earnings");
-      const mobile = await AsyncStorage.getItem("mobile");
-      const email = await AsyncStorage.getItem("email");
-
-      if (name !== null) {
-        // We have data!!
-        setname(name);
-        setuser_id(user_id);
-        setearnings(earnings);
-        setmobile(mobile);
-        setemail(email);
-      }
-    } catch (error) {
-      // Error retrieving data
-    }
-  };
-
-  const clickHandler = () => {
-    //function to handle click on floating Action Button
-    alert("Floating Button Clicked");
-  };
-
-  useEffect(() => {
-    readData();
-  }, []);
-
   const renderPurchase = ({ item }) => (
     <Purchase>
       <PurchaseInfo>
         <Text heavy>{item.product}</Text>
-        <Text bold margin='2px 0 2px 0'>
-          {item.store}
-        </Text>
+
         <Text small color='#111111'>
-          {item.address}
+          {item.purchaseDate}
         </Text>
       </PurchaseInfo>
       <Text heavy>{item.price}</Text>
@@ -94,7 +68,7 @@ export default Home = ({ navigation }) => {
               color: COLORS.white,
             }}
           >
-            {{ name }}
+            David Adokuru
           </Text>
         </Welcome>
         <View style={{ alignItems: "center", justifyContent: "center" }}>

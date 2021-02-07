@@ -57,11 +57,7 @@ const Login = ({ navigation }) => {
         let user = responseJson.userData[0];
         // If server response message same as Data Matched
         if (responseJson.success === "200") {
-          AsyncStorage.setItem("user_id", user.clientID);
-          AsyncStorage.setItem("earnings", user.earnings);
-          AsyncStorage.setItem("name", user.name);
-          AsyncStorage.setItem("mobile", user.mobile);
-          AsyncStorage.setItem("email", user.email);
+          AsyncStorage.setItem("User_id", user.clientID);
           navigation.replace("DrawerNavigationRoutes");
         } else {
           setErrortext(responseJson.message);
@@ -184,14 +180,13 @@ const Login = ({ navigation }) => {
           style={{
             height: 45,
             backgroundColor: COLORS.primary,
-            // borderRadius: SIZES.radius / 1.5,
+            borderRadius: SIZES.radius / 1.5,
             alignItems: "center",
             justifyContent: "center",
           }}
           onPress={handleSubmitPress}
-          // onPress={this.loginFunction}
         >
-          <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Login</Text>
+          <Text style={{ color: COLORS.white, ...FONTS.h4 }}>Login</Text>
         </TouchableOpacity>
       </View>
     );
