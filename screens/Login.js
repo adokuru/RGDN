@@ -228,15 +228,22 @@ const Login = ({ navigation }) => {
               {errortext}
             </Text>
           ) : null}
-          <View style={{ alignItems: "center", Top: 40 }}>
+          <View
+            style={{
+              alignItems: "center",
+              Top: 40,
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
             <Text style={{ color: COLORS.black, ...FONTS.body2 }}>
               Don’t have a account?{" "}
-              <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
-                <Text style={{ color: COLORS.primary, ...FONTS.body2 }}>
-                  Click here
-                </Text>
-              </TouchableOpacity>
             </Text>
+            <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+              <Text style={{ color: COLORS.primary, ...FONTS.body2 }}>
+                Click here
+              </Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </LinearGradient>
