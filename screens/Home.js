@@ -5,12 +5,14 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
+  ScrollView,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import styled from "styled-components";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import Text from "../constants/Text";
 import purchaseData from "../purchases";
+import { Input, Button } from "galio-framework";
 
 export default Home = ({ navigation }) => {
   // useEffect(() => {
@@ -28,20 +30,25 @@ export default Home = ({ navigation }) => {
   const toggleDrawer = () => {
     navigation.toggleDrawer();
   };
-
-  const renderPurchase = ({ item }) => (
-    <Purchase>
-      <PurchaseInfo>
-        <Text heavy>{item.product}</Text>
-
-        <Text small color='#111111'>
-          {item.purchaseDate}
-        </Text>
-      </PurchaseInfo>
-      <Text heavy>{item.price}</Text>
-    </Purchase>
-  );
-
+  function renderButton() {
+    return (
+      <View style={{ margin: SIZES.padding * 1 }}>
+        <TouchableOpacity
+          style={{
+            height: 50,
+            backgroundColor: COLORS.primary,
+            borderRadius: SIZES.radius / 1.5,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onPress={() => navigation.replace("DrawerNavigationRoutes")}
+          // onPress={() => navigation.navigate("Home")}
+        >
+          <Text style={{ color: COLORS.white, ...FONTS.h4 }}>SPONSOR</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
   return (
     <Container>
       <Header>
@@ -102,7 +109,7 @@ export default Home = ({ navigation }) => {
           marginBottom: SIZES.padding,
         }}
       >
-        ₦12 487.12
+        ₦ 0.00
       </Text>
       <Text
         center
@@ -113,53 +120,90 @@ export default Home = ({ navigation }) => {
         Earnings
       </Text>
 
-      <Purchases
-        ListHeaderComponent={
-          <>
-            <TransactionsHeader>
-              <Text style={{ ...FONTS.h3, color: COLORS.black }}>History</Text>
-              <TouchableWithoutFeedback
-                onPress={() => navigation.navigate("History")}
-              >
-                <Text
-                  style={{
-                    marginVertical: SIZES.padding,
-                    marginHorizontal: SIZES.padding,
-                    color: COLORS.black,
-                    ...FONTS.body4,
-                  }}
-                >
-                  See All
-                </Text>
-              </TouchableWithoutFeedback>
-            </TransactionsHeader>
-
-            <SearchContainer></SearchContainer>
-          </>
-        }
-        data={purchaseData}
-        renderItem={renderPurchase}
-        showsVerticalScrollIndicator={false}
-      />
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Wallet")}
-          style={styles.touchableOpacityStyle}
-        >
-          <Image
-            // FAB using TouchableOpacity with an image
-            // For online image
-            source={icons.wallet}
-            // For local image
-            //source={require('./images/float-add-icon.png')}
-            style={{
-              ...styles.floatingButtonStyle,
-              tintColor: COLORS.primary,
-            }}
-          />
-        </TouchableOpacity>
-      </View>
       <StatusBar barStyle='light-content' />
+      <View
+        style={{
+          flex: "1",
+          justifyContent: "center",
+          alignContent: "center",
+          backgroundColor: "white",
+          borderBottomColor: "#111111",
+          borderBottomWidth: 1,
+        }}
+      >
+        <ScrollView
+          style={{
+            marginVertical: SIZES.padding * 2,
+            marginHorizontal: SIZES.padding * 2,
+          }}
+        >
+          <View style={{ Top: 40 }}>
+            <Text
+              style={{
+                color: COLORS.black,
+                fontWeight: "normal",
+                marginBottom: SIZES.padding,
+                ...FONTS.h2,
+              }}
+            >
+              Sponsor Copies
+            </Text>
+          </View>
+          <Input
+            placeholder='Tobi David'
+            color={COLORS.primary}
+            style={{ borderColor: COLORS.primary }}
+            placeholderTextColor={COLORS.primary}
+            label='Name'
+          />
+
+          <Input
+            placeholder='xxxx@rgdn.org'
+            color={COLORS.primary}
+            style={{ borderColor: COLORS.primary }}
+            placeholderTextColor={COLORS.primary}
+            label='Email'
+          />
+          <Input
+            placeholder='08033XXXXX'
+            color={COLORS.primary}
+            style={{ borderColor: COLORS.primary }}
+            placeholderTextColor={COLORS.primary}
+            label='Phone Number'
+          />
+          <View
+            style={{
+              flexDirection: "row",
+              alignContent: "flex-end",
+              marginBottom: SIZES.padding,
+              flex: 1,
+            }}
+          >
+            <View style={{ width: "49%" }}>
+              <Input
+                style={{ width: "49%" }}
+                placeholder='100'
+                color={COLORS.primary}
+                style={{ borderColor: COLORS.primary }}
+                placeholderTextColor={COLORS.primary}
+                label='No. of copies:'
+              />
+            </View>
+            <View style={{ width: "49%", left: 5 }}>
+              <Input
+                style={{ width: "49%" }}
+                placeholder='₦ 12 487.12'
+                color={COLORS.primary}
+                style={{ borderColor: COLORS.primary }}
+                placeholderTextColor={COLORS.primary}
+                label='Price'
+              />
+            </View>
+          </View>
+
+          {renderButton()}
+        </ScrollView>
+      </View>
     </Container>
   );
 };

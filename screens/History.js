@@ -15,6 +15,18 @@ export default function History({ navigation }) {
   const toggleDrawer = () => {
     navigation.toggleDrawer();
   };
+  const renderPurchase = ({ item }) => (
+    <Purchase>
+      <PurchaseInfo>
+        <Text heavy>{item.product}</Text>
+
+        <Text small color='#111111'>
+          {item.purchaseDate}
+        </Text>
+      </PurchaseInfo>
+      <Text heavy>{item.price}</Text>
+    </Purchase>
+  );
 
   return (
     <Container>
@@ -54,6 +66,54 @@ export default function History({ navigation }) {
                 width: 20,
                 height: 20,
                 tintColor: COLORS.white,
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+        <Purchases
+          ListHeaderComponent={
+            <>
+              <TransactionsHeader>
+                <Text style={{ ...FONTS.h3, color: COLORS.black }}>
+                  History
+                </Text>
+                <TouchableWithoutFeedback
+                  onPress={() => navigation.navigate("History")}
+                >
+                  <Text
+                    style={{
+                      marginVertical: SIZES.padding,
+                      marginHorizontal: SIZES.padding,
+                      color: COLORS.black,
+                      ...FONTS.body4,
+                    }}
+                  >
+                    See All
+                  </Text>
+                </TouchableWithoutFeedback>
+              </TransactionsHeader>
+
+              <SearchContainer></SearchContainer>
+            </>
+          }
+          data={purchaseData}
+          renderItem={renderPurchase}
+          showsVerticalScrollIndicator={false}
+        />
+        <View style={styles.container}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Wallet")}
+            style={styles.touchableOpacityStyle}
+          >
+            <Image
+              // FAB using TouchableOpacity with an image
+              // For online image
+              source={icons.wallet}
+              // For local image
+              //source={require('./images/float-add-icon.png')}
+              style={{
+                ...styles.floatingButtonStyle,
+                tintColor: COLORS.primary,
               }}
             />
           </TouchableOpacity>
