@@ -37,7 +37,7 @@ export default Home = ({ navigation }) => {
           style={{
             height: 50,
             backgroundColor: COLORS.primary,
-            borderRadius: SIZES.radius / 1.5,
+            borderRadius: SIZES.radius / 2.5,
             alignItems: "center",
             justifyContent: "center",
           }}
