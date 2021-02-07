@@ -20,7 +20,7 @@ export default function LiveService({ navigation }) {
   const url = "https://www.youtube.com/embed/W1CTwPq84Ps";
   return (
     <Container>
-      <StatusBar barStyle='light-content' />
+      <StatusBar barStysle='light-content' />
       <Header>
         <TouchableOpacity onPress={toggleDrawer}>
           <ProfilePhoto

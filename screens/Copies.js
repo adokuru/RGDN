@@ -35,7 +35,7 @@ export default function Copies({ navigation }) {
               color: COLORS.white,
             }}
           >
-            Copies
+            Sponsor Copies
           </Text>
         </Welcome>
         <View style={{ alignItems: "center", justifyContent: "center" }}>

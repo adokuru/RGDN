@@ -32,6 +32,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "Rhapsody of Realities: The Rhapsody Global Distributors Network (RGDN), is a global network of individuals or organizations committed to reaching their respective worlds with the purchase and distribution of Rhapsody of Realities daily devotional."
+    "description": "Rhapsody of Realities: The Rhapsody Global Distributors Network (RGDN), is a global network of individuals or organizations committed to reaching their respective worlds with the purchase and distribution of Rhapsody of Realities daily devotional.",
+    "githubUrl": "https://github.com/adokuru/RGDN"
   }
 }

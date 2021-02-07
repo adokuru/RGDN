@@ -65,10 +65,10 @@ const CopiesScreenStack = ({ navigation }) => {
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen
-        name='Copies'
+        name='Sponsor Copies'
         component={Copies}
         options={{
-          title: "Copies", //Set Header Title
+          title: "Sponsor Copies", //Set Header Title
         }}
       />
     </Stack.Navigator>
@@ -110,19 +110,7 @@ const FAQScreenStack = ({ navigation }) => {
   return (
     <Stack.Navigator
       initialRouteName='FAQ'
-      screenOptions={{
-        title: "FAQ", //Set Header Title
-        headerLeft: () => (
-          <NavigationDrawerHeader navigationProps={navigation} />
-        ),
-        headerStyle: {
-          backgroundColor: "#fff", //Set Header color
-        },
-        headerTintColor: "#111", //Set Header text color
-        headerTitleStyle: {
-          fontWeight: "bold", //Set Header text style
-        },
-      }}
+      screenOptions={{ headerShown: false }}
     >
       <Stack.Screen
         name='FAQ'
@@ -174,15 +162,11 @@ const DrawerNavigatorRoutes = (props) => {
         component={WalletScreenStack}
       />
       <Drawer.Screen
-        name='Copies'
+        name='Sponsor Copies'
         options={{
-          drawerLabel: "Copies",
+          drawerLabel: "Sponsor Copies",
           drawerIcon: (config) => (
-            <MaterialIcons
-              name='account-balance-wallet'
-              size={24}
-              color='#032B80'
-            />
+            <MaterialIcons name='book' size={24} color='#032B80' />
           ),
         }}
         component={CopiesScreenStack}
