@@ -6,6 +6,7 @@ import {
   Image,
   StyleSheet,
   ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import styled from "styled-components";
@@ -137,71 +138,73 @@ export default Home = ({ navigation }) => {
             marginHorizontal: SIZES.padding * 2,
           }}
         >
-          <View style={{ Top: 40 }}>
-            <Text
+          <KeyboardAvoidingView>
+            <View style={{ Top: 40 }}>
+              <Text
+                style={{
+                  color: COLORS.black,
+                  fontWeight: "normal",
+                  marginBottom: SIZES.padding,
+                  ...FONTS.h2,
+                }}
+              >
+                Sponsor Copies
+              </Text>
+            </View>
+            <Input
+              placeholder='Tobi David'
+              color={COLORS.primary}
+              style={{ borderColor: COLORS.primary }}
+              placeholderTextColor={COLORS.primary}
+              label='Name'
+            />
+
+            <Input
+              placeholder='xxxx@rgdn.org'
+              color={COLORS.primary}
+              style={{ borderColor: COLORS.primary }}
+              placeholderTextColor={COLORS.primary}
+              label='Email'
+            />
+            <Input
+              placeholder='08033XXXXX'
+              color={COLORS.primary}
+              style={{ borderColor: COLORS.primary }}
+              placeholderTextColor={COLORS.primary}
+              label='Phone Number'
+            />
+            <View
               style={{
-                color: COLORS.black,
-                fontWeight: "normal",
+                flexDirection: "row",
+                alignContent: "flex-end",
                 marginBottom: SIZES.padding,
-                ...FONTS.h2,
+                flex: 1,
               }}
             >
-              Sponsor Copies
-            </Text>
-          </View>
-          <Input
-            placeholder='Tobi David'
-            color={COLORS.primary}
-            style={{ borderColor: COLORS.primary }}
-            placeholderTextColor={COLORS.primary}
-            label='Name'
-          />
-
-          <Input
-            placeholder='xxxx@rgdn.org'
-            color={COLORS.primary}
-            style={{ borderColor: COLORS.primary }}
-            placeholderTextColor={COLORS.primary}
-            label='Email'
-          />
-          <Input
-            placeholder='08033XXXXX'
-            color={COLORS.primary}
-            style={{ borderColor: COLORS.primary }}
-            placeholderTextColor={COLORS.primary}
-            label='Phone Number'
-          />
-          <View
-            style={{
-              flexDirection: "row",
-              alignContent: "flex-end",
-              marginBottom: SIZES.padding,
-              flex: 1,
-            }}
-          >
-            <View style={{ width: "49%" }}>
-              <Input
-                style={{ width: "49%" }}
-                placeholder='100'
-                color={COLORS.primary}
-                style={{ borderColor: COLORS.primary }}
-                placeholderTextColor={COLORS.primary}
-                label='No. of copies:'
-              />
+              <View style={{ width: "49%" }}>
+                <Input
+                  style={{ width: "49%" }}
+                  placeholder='100'
+                  color={COLORS.primary}
+                  style={{ borderColor: COLORS.primary }}
+                  placeholderTextColor={COLORS.primary}
+                  label='No. of copies:'
+                />
+              </View>
+              <View style={{ width: "49%", left: 5 }}>
+                <Input
+                  style={{ width: "49%" }}
+                  placeholder='₦ 12 487.12'
+                  color={COLORS.primary}
+                  style={{ borderColor: COLORS.primary }}
+                  placeholderTextColor={COLORS.primary}
+                  label='Price'
+                />
+              </View>
             </View>
-            <View style={{ width: "49%", left: 5 }}>
-              <Input
-                style={{ width: "49%" }}
-                placeholder='₦ 12 487.12'
-                color={COLORS.primary}
-                style={{ borderColor: COLORS.primary }}
-                placeholderTextColor={COLORS.primary}
-                label='Price'
-              />
-            </View>
-          </View>
 
-          {renderButton()}
+            {renderButton()}
+          </KeyboardAvoidingView>
         </ScrollView>
       </View>
     </Container>

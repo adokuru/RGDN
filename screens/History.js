@@ -47,7 +47,7 @@ export default function History({ navigation }) {
               color: COLORS.white,
             }}
           >
-            History
+            Sponsor Copies
           </Text>
         </Welcome>
         <View style={{ alignItems: "center", justifyContent: "center" }}>
