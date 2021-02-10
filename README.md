@@ -14,19 +14,17 @@ RGDN-APP/
 ├── README.md
 ├── app.json
 ├── assets
-├── expo-font
 ├── babel.config.js
 ├── Screens
-│   ├── example.js
 │   ├── FAQ.js
 │   ├── history.js
 │   ├── Home.js
+│   ├── Copies.js
 │   ├── index.js
 │   ├── LiveService.js
 │   ├── login.js
-│   ├── parttwo.js
 │   ├── signup.js
-│   └── waller.js
+│   └── wallet.js
 ├── constants
 │   ├── bounce.js
 │   ├── CustomSidebarMenu.js

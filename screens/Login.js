@@ -13,6 +13,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { COLORS, SIZES, FONTS, icons, images } from "../constants";
 import AsyncStorage from "@react-native-community/async-storage";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 
 import Loader from "../constants/Loader";
 
@@ -199,7 +200,7 @@ const Login = ({ navigation }) => {
     >
       <Loader loading={loading} />
       <LinearGradient colors={[COLORS.white, COLORS.white]} style={{ flex: 1 }}>
-        <ScrollView>
+        <KeyboardAwareScrollView>
           <View
             style={{
               flexDirection: "row",
@@ -245,7 +246,7 @@ const Login = ({ navigation }) => {
               </Text>
             </TouchableOpacity>
           </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </LinearGradient>
     </KeyboardAvoidingView>
   );

@@ -17,7 +17,7 @@ export default function LiveService({ navigation }) {
     navigation.toggleDrawer();
   };
 
-  const url = "https://www.youtube.com/embed/W1CTwPq84Ps";
+  const url = "https://www.youtube.com/embed/xMPQb-fOjZU";
   return (
     <Container>
       <StatusBar barStysle='light-content' />

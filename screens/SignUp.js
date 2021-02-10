@@ -13,7 +13,7 @@ import {
   Platform,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import { COLORS, SIZES, FONTS, icons, images } from "../constants";
 
 const SignUp = ({ navigation }) => {
@@ -176,7 +176,7 @@ const SignUp = ({ navigation }) => {
   }
 
   return (
-    <KeyboardAvoidingView
+    <KeyboardAwareScrollView
       behavior={Platform.OS === "ios" ? "padding" : null}
       style={{ flex: 1 }}
     >
@@ -188,7 +188,7 @@ const SignUp = ({ navigation }) => {
           {renderButton()}
         </ScrollView>
       </LinearGradient>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 };
 

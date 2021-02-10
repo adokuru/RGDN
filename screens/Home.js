@@ -6,7 +6,6 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  KeyboardAvoidingView,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import styled from "styled-components";
@@ -14,6 +13,7 @@ import { COLORS, FONTS, icons, SIZES } from "../constants";
 import Text from "../constants/Text";
 import purchaseData from "../purchases";
 import { Input, Button } from "galio-framework";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 
 export default Home = ({ navigation }) => {
   // useEffect(() => {
@@ -132,106 +132,83 @@ export default Home = ({ navigation }) => {
           borderBottomWidth: 1,
         }}
       >
-        <ScrollView
+        <KeyboardAwareScrollView
           style={{
             marginVertical: SIZES.padding * 2,
             marginHorizontal: SIZES.padding * 2,
           }}
         >
-          <KeyboardAvoidingView>
-            <View style={{ Top: 40 }}>
-              <Text
-                style={{
-                  color: COLORS.black,
-                  fontWeight: "normal",
-                  marginBottom: SIZES.padding,
-                  ...FONTS.h2,
-                }}
-              >
-                Sponsor Copies
-              </Text>
-            </View>
-            <Input
-              placeholder='Tobi David'
-              color={COLORS.primary}
-              style={{ borderColor: COLORS.primary }}
-              placeholderTextColor={COLORS.primary}
-              label='Name'
-            />
-
-            <Input
-              placeholder='xxxx@rgdn.org'
-              color={COLORS.primary}
-              style={{ borderColor: COLORS.primary }}
-              placeholderTextColor={COLORS.primary}
-              label='Email'
-            />
-            <Input
-              placeholder='08033XXXXX'
-              color={COLORS.primary}
-              style={{ borderColor: COLORS.primary }}
-              placeholderTextColor={COLORS.primary}
-              label='Phone Number'
-            />
-            <View
+          <View style={{ Top: 40 }}>
+            <Text
               style={{
-                flexDirection: "row",
-                alignContent: "flex-end",
+                color: COLORS.black,
+                fontWeight: "normal",
                 marginBottom: SIZES.padding,
-                flex: 1,
+                ...FONTS.h2,
               }}
             >
-              <View style={{ width: "49%" }}>
-                <Input
-                  style={{ width: "49%" }}
-                  placeholder='100'
-                  color={COLORS.primary}
-                  style={{ borderColor: COLORS.primary }}
-                  placeholderTextColor={COLORS.primary}
-                  label='No. of copies:'
-                />
-              </View>
-              <View style={{ width: "49%", left: 5 }}>
-                <Input
-                  style={{ width: "49%" }}
-                  placeholder='₦ 12 487.12'
-                  color={COLORS.primary}
-                  style={{ borderColor: COLORS.primary }}
-                  placeholderTextColor={COLORS.primary}
-                  label='Price'
-                />
-              </View>
-            </View>
+              Sponsor Copies
+            </Text>
+          </View>
+          <Input
+            placeholder='Tobi David'
+            color={COLORS.primary}
+            style={{ borderColor: COLORS.primary }}
+            placeholderTextColor={COLORS.primary}
+            label='Name'
+          />
 
-            {renderButton()}
-          </KeyboardAvoidingView>
-        </ScrollView>
+          <Input
+            placeholder='xxxx@rgdn.org'
+            color={COLORS.primary}
+            style={{ borderColor: COLORS.primary }}
+            placeholderTextColor={COLORS.primary}
+            label='Email'
+          />
+          <Input
+            placeholder='08033XXXXX'
+            color={COLORS.primary}
+            style={{ borderColor: COLORS.primary }}
+            placeholderTextColor={COLORS.primary}
+            label='Phone Number'
+          />
+          <View
+            style={{
+              flexDirection: "row",
+              alignContent: "flex-end",
+              marginBottom: SIZES.padding,
+              flex: 1,
+            }}
+          >
+            <View style={{ width: "49%" }}>
+              <Input
+                style={{ width: "49%" }}
+                placeholder='100'
+                color={COLORS.primary}
+                style={{ borderColor: COLORS.primary }}
+                placeholderTextColor={COLORS.primary}
+                label='No. of copies:'
+              />
+            </View>
+            <View style={{ width: "49%", left: 5 }}>
+              <Input
+                style={{ width: "49%" }}
+                placeholder='₦ 12 487.12'
+                color={COLORS.primary}
+                style={{ borderColor: COLORS.primary }}
+                placeholderTextColor={COLORS.primary}
+                label='Price'
+              />
+            </View>
+          </View>
+
+          {renderButton()}
+        </KeyboardAwareScrollView>
       </View>
     </Container>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    padding: 10,
-  },
-  touchableOpacityStyle: {
-    position: "absolute",
-    width: 50,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    right: 30,
-    bottom: 30,
-  },
-  floatingButtonStyle: {
-    resizeMode: "contain",
-    width: 50,
-    height: 50,
-    //backgroundColor:'black'
-  },
-});
+
 const Container = styled.SafeAreaView`
   flex: 1;
   background-color: #032b80;

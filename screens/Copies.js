@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import Text from "../constants/Text";
 import { Input } from "galio-framework";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 
 export default Copies = ({ navigation }) => {
   const toggleDrawer = () => {
@@ -108,7 +109,7 @@ export default Copies = ({ navigation }) => {
           borderBottomWidth: 1,
         }}
       >
-        <ScrollView
+        <KeyboardAwareScrollView
           style={{
             marginVertical: SIZES.padding * 2,
             marginHorizontal: SIZES.padding * 2,
@@ -179,7 +180,7 @@ export default Copies = ({ navigation }) => {
           </View>
 
           {renderButton()}
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </View>
     </Container>
   );

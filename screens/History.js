@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import styled from "styled-components";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import Text from "../constants/Text";
+import purchaseData from "../purchases";
 
 export default function History({ navigation }) {
   const toggleDrawer = () => {
@@ -70,58 +71,64 @@ export default function History({ navigation }) {
             />
           </TouchableOpacity>
         </View>
-        <Purchases
-          ListHeaderComponent={
-            <>
-              <TransactionsHeader>
-                <Text style={{ ...FONTS.h3, color: COLORS.black }}>
-                  History
-                </Text>
-                <TouchableWithoutFeedback
-                  onPress={() => navigation.navigate("History")}
-                >
-                  <Text
-                    style={{
-                      marginVertical: SIZES.padding,
-                      marginHorizontal: SIZES.padding,
-                      color: COLORS.black,
-                      ...FONTS.body4,
-                    }}
-                  >
-                    See All
-                  </Text>
-                </TouchableWithoutFeedback>
-              </TransactionsHeader>
-
-              <SearchContainer></SearchContainer>
-            </>
-          }
-          data={purchaseData}
-          renderItem={renderPurchase}
-          showsVerticalScrollIndicator={false}
-        />
-        <View style={styles.container}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Wallet")}
-            style={styles.touchableOpacityStyle}
-          >
-            <Image
-              // FAB using TouchableOpacity with an image
-              // For online image
-              source={icons.wallet}
-              // For local image
-              //source={require('./images/float-add-icon.png')}
-              style={{
-                ...styles.floatingButtonStyle,
-                tintColor: COLORS.primary,
-              }}
-            />
-          </TouchableOpacity>
-        </View>
       </Header>
+      <Purchases
+        ListHeaderComponent={
+          <>
+            <TransactionsHeader>
+              <Text style={{ ...FONTS.h3, color: COLORS.black }}>History</Text>
+            </TransactionsHeader>
+
+            <SearchContainer></SearchContainer>
+          </>
+        }
+        data={purchaseData}
+        renderItem={renderPurchase}
+        showsVerticalScrollIndicator={false}
+      />
+      <View style={styles.container}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Wallet")}
+          style={styles.touchableOpacityStyle}
+        >
+          <Image
+            // FAB using TouchableOpacity with an image
+            // For online image
+            source={icons.wallet}
+            // For local image
+            //source={require('./images/float-add-icon.png')}
+            style={{
+              ...styles.floatingButtonStyle,
+              tintColor: COLORS.primary,
+            }}
+          />
+        </TouchableOpacity>
+      </View>
     </Container>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    padding: 10,
+  },
+  touchableOpacityStyle: {
+    position: "absolute",
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    right: 30,
+    bottom: 30,
+  },
+  floatingButtonStyle: {
+    resizeMode: "contain",
+    width: 50,
+    height: 50,
+    //backgroundColor:'black'
+  },
+});
 const Container = styled.SafeAreaView`
   flex: 1;
   background-color: #032b80;
