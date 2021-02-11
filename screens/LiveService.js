@@ -18,6 +18,7 @@ export default function LiveService({ navigation }) {
   };
 
   const url = "https://www.youtube.com/embed/xMPQb-fOjZU";
+  let name = global.uDm;
   return (
     <Container>
       <StatusBar barStysle='light-content' />
@@ -25,8 +26,7 @@ export default function LiveService({ navigation }) {
         <TouchableOpacity onPress={toggleDrawer}>
           <ProfilePhoto
             source={{
-              uri:
-                "https://ui-avatars.com/api/?background=FFFFFF&color=000&name=David+Adokuru",
+              uri: `https://ui-avatars.com/api/?background=FFFFFF&color=000&name=${name}`,
             }}
           />
         </TouchableOpacity>

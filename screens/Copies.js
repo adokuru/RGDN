@@ -16,6 +16,7 @@ export default Copies = ({ navigation }) => {
   const toggleDrawer = () => {
     navigation.toggleDrawer();
   };
+  let name = global.uDm;
   function renderButton() {
     return (
       <View style={{ margin: SIZES.padding * 1 }}>
@@ -41,8 +42,7 @@ export default Copies = ({ navigation }) => {
         <TouchableOpacity onPress={toggleDrawer}>
           <ProfilePhoto
             source={{
-              uri:
-                "https://ui-avatars.com/api/?background=FFFFFF&color=000&name=David+Adokuru",
+              uri: `https://ui-avatars.com/api/?background=FFFFFF&color=000&name=${name}`,
             }}
           />
         </TouchableOpacity>

@@ -1,4 +1,4 @@
-import React, { useState, createRef } from "react";
+import React, { useState, createRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,7 +6,6 @@ import {
   Image,
   TextInput,
   KeyboardAvoidingView,
-  ScrollView,
   Platform,
   Keyboard,
 } from "react-native";
@@ -14,7 +13,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { COLORS, SIZES, FONTS, icons, images } from "../constants";
 import AsyncStorage from "@react-native-community/async-storage";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
-
 import Loader from "../constants/Loader";
 
 const Login = ({ navigation }) => {
@@ -23,7 +21,6 @@ const Login = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState("");
   const [showPassword, setShowPassword] = React.useState(false);
-
   const passwordInputRef = createRef();
 
   const handleSubmitPress = () => {
@@ -58,8 +55,13 @@ const Login = ({ navigation }) => {
         let user = responseJson.userData[0];
         // If server response message same as Data Matched
         if (responseJson.success === "200") {
-          AsyncStorage.setItem("User_id", user.clientID);
-          navigation.replace("DrawerNavigationRoutes");
+          AsyncStorage.setItem("user", JSON.stringify(user))
+            .then(() => {
+              navigation.replace("DrawerNavigationRoutes");
+            })
+            .catch(() => {
+              setErrortext("There was an error saving the product");
+            });
         } else {
           setErrortext(responseJson.message);
         }
@@ -69,6 +71,20 @@ const Login = ({ navigation }) => {
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(true);
+      //Check if user_id is set or not
+      //If not then send for Authentication
+      //else send to Home Screen
+      AsyncStorage.getItem("user").then((value) =>
+        value === null
+          ? setLoading(false)
+          : navigation.replace("DrawerNavigationRoutes")
+      );
+    }, 500);
+  }, []);
 
   function renderLogo() {
     return (

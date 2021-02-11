@@ -13,6 +13,7 @@ import Text from "../constants/Text";
 import purchaseData from "../purchases";
 
 export default function History({ navigation }) {
+  let name = global.uDm;
   const toggleDrawer = () => {
     navigation.toggleDrawer();
   };
@@ -36,8 +37,7 @@ export default function History({ navigation }) {
         <TouchableOpacity onPress={toggleDrawer}>
           <ProfilePhoto
             source={{
-              uri:
-                "https://ui-avatars.com/api/?background=FFFFFF&color=000&name=David+Adokuru",
+              uri: `https://ui-avatars.com/api/?background=FFFFFF&color=000&name=${name}`,
             }}
           />
         </TouchableOpacity>

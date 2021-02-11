@@ -11,26 +11,46 @@ import AsyncStorage from "@react-native-community/async-storage";
 import styled from "styled-components";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import Text from "../constants/Text";
-import purchaseData from "../purchases";
 import { Input, Button } from "galio-framework";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
+import Loader from "../constants/Loader";
 
 export default Home = ({ navigation }) => {
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setAnimating(false);
-  //     //Check if user_id is set or not
-  //     //If not then send for Authentication
-  //     //else send to Home Screen
-  //     AsyncStorage.getItem("user_id").then((value) =>
-  //       navigation.replace(value === null ? "Auth" : "DrawerNavigationRoutes")
-  //     );
-  //   }, 5000);
-  // }, []);
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState([]);
+  const load = async () => {
+    try {
+      setLoading(true);
+      await AsyncStorage.getItem("user").then((value) => {
+        const data = JSON.parse(value);
+        if (data !== null) {
+          setUser(data);
+        }
+      });
+    } catch (err) {
+      alert(err);
+    }
+  };
+  useEffect(() => {
+    load();
+    setTimeout(() => {
+      //Check if user_id is set or not
+      //If not then send for Authentication
+      //else send to Home Screen
+      AsyncStorage.getItem("user").then((value) =>
+        value === null ? navigation.replace("Auth") : setLoading(false)
+      );
+    }, 500);
+  }, []);
+  let userDetail = user;
+  global.uDm = userDetail.name;
+  console.log(userDetail);
+  let name = userDetail.name;
 
   const toggleDrawer = () => {
     navigation.toggleDrawer();
   };
+
   function renderButton() {
     return (
       <View style={{ margin: SIZES.padding * 1 }}>
@@ -52,12 +72,12 @@ export default Home = ({ navigation }) => {
   }
   return (
     <Container>
+      <Loader loading={loading} />
       <Header>
         <TouchableOpacity onPress={toggleDrawer}>
           <ProfilePhoto
             source={{
-              uri:
-                "https://ui-avatars.com/api/?background=FFFFFF&color=000&name=David+Adokuru",
+              uri: `https://ui-avatars.com/api/?background=FFFFFF&color=000&name=${name}`,
             }}
           />
         </TouchableOpacity>
@@ -76,7 +96,7 @@ export default Home = ({ navigation }) => {
               color: COLORS.white,
             }}
           >
-            David Adokuru
+            {name}
           </Text>
         </Welcome>
         <View style={{ alignItems: "center", justifyContent: "center" }}>
@@ -100,7 +120,6 @@ export default Home = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </Header>
-
       <Text
         center
         title
@@ -110,7 +129,9 @@ export default Home = ({ navigation }) => {
           marginBottom: SIZES.padding,
         }}
       >
-        ₦ 0.00
+        {userDetail.earnings === 0
+          ? "₦0.00"
+          : "₦" + userDetail.earnings + ".00"}
       </Text>
       <Text
         center
@@ -120,7 +141,6 @@ export default Home = ({ navigation }) => {
       >
         Earnings
       </Text>
-
       <StatusBar barStyle='light-content' />
       <View
         style={{

@@ -12,6 +12,7 @@ import { COLORS, FONTS, icons, SIZES } from "../constants";
 import Text from "../constants/Text";
 
 export default function FAQ({ navigation }) {
+  let name = global.uDm;
   const data = {
     title: "FAQ (How it works)",
     rows: [
@@ -66,8 +67,7 @@ export default function FAQ({ navigation }) {
         <TouchableOpacity onPress={toggleDrawer}>
           <ProfilePhoto
             source={{
-              uri:
-                "https://ui-avatars.com/api/?background=FFFFFF&color=000&name=David+Adokuru",
+              uri: `https://ui-avatars.com/api/?background=FFFFFF&color=000&name=${name}`,
             }}
           />
         </TouchableOpacity>

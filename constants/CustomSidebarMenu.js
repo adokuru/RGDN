@@ -3,7 +3,7 @@
 
 // Import React and Component
 import React from "react";
-import { View, Text, Alert, StyleSheet } from "react-native";
+import { View, Text, Alert, StyleSheet, Image } from "react-native";
 
 import {
   DrawerContentScrollView,
@@ -16,20 +16,48 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { COLORS, SIZES, FONTS, icons, images } from "../constants";
 
 const CustomSidebarMenu = (props) => {
+  let name = global.uDm;
   return (
     <View style={stylesSidebar.sideMenuContainer}>
       <View style={stylesSidebar.profileHeader}>
         <View style={stylesSidebar.profileHeaderPicCircle}>
-          <Text style={{ fontSize: 25, color: "#fff" }}>
-            {"David Adokuru".charAt()}
-          </Text>
+          <Image
+            style={{ width: 40, height: 40, borderRadius: 20 }}
+            source={{
+              uri: `https://ui-avatars.com/api/?background=032B80&color=fff&name=${name}`,
+            }}
+          />
         </View>
-        <Text style={stylesSidebar.profileHeaderText}>David Adokuru</Text>
+        <Text style={stylesSidebar.profileHeaderText}> {global.uDm}</Text>
       </View>
       <View style={stylesSidebar.profileHeaderLine} />
 
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
+        <DrawerItem
+          label={({ color }) => (
+            <View
+              style={{
+                flexDirection: "row",
+              }}
+            >
+              <MaterialIcons name='share' size={24} color='#032B80' />
+              <Text
+                style={{
+                  color: "#032B80",
+                  left: 35,
+                  top: 2,
+                  ...FONTS.body3,
+                }}
+              >
+                Share
+              </Text>
+            </View>
+          )}
+          onPress={() => {
+            props.navigation.toggleDrawer();
+          }}
+        />
         <DrawerItem
           label={({ color }) => (
             <View
