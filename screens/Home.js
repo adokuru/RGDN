@@ -44,7 +44,6 @@ export default Home = ({ navigation }) => {
   }, []);
   let userDetail = user;
   global.uDm = userDetail.name;
-  console.log(userDetail);
   let name = userDetail.name;
 
   const toggleDrawer = () => {
