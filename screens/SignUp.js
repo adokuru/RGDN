@@ -14,11 +14,19 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
-import { COLORS, SIZES, FONTS, icons, images } from "../constants";
+import {
+  COLORS,
+  SIZES,
+  FONTS,
+  icons,
+  images,
+  TITLE,
+  ZONES,
+} from "../constants";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const SignUp = ({ navigation }) => {
   const [showPassword, setShowPassword] = React.useState(false);
-
   function renderHeader() {
     return (
       <TouchableOpacity
@@ -78,12 +86,43 @@ const SignUp = ({ navigation }) => {
     return (
       <View
         style={{
-          marginTop: SIZES.padding * 3,
-          marginHorizontal: SIZES.padding * 3,
+          marginTop: SIZES.padding * 2,
+          marginHorizontal: SIZES.padding * 2,
         }}
       >
+        {/* Title */}
+        <View style={{ marginTop: SIZES.padding * 2, zIndex: 99999 }}>
+          <DropDownPicker
+            items={TITLE.data}
+            label='Title'
+            placeholder='Select Title'
+            onChangeItem={(item) => console.log(item.key, item.value)}
+            containerStyle={{
+              marginTop: "5%",
+              height: 50,
+              flex: 1,
+            }}
+            style={{
+              backgroundColor: "#ffffff",
+              color: COLORS.black,
+              borderRadius: 0,
+              justifyContent: "flex-start",
+              borderColor: "transparent",
+              borderBottomColor: COLORS.black,
+              borderBottomWidth: 1,
+              color: COLORS.black,
+              ...FONTS.body3,
+            }}
+            dropDownMaxHeight={150}
+            itemStyle={{
+              justifyContent: "flex-start",
+            }}
+            dropDownStyle={{ backgroundColor: "#fff" }}
+          />
+        </View>
+
         {/* Full Name */}
-        <View style={{ marginTop: SIZES.padding * 1 }}>
+        <View style={{ marginTop: SIZES.padding * 2 }}>
           <TextInput
             style={{
               marginVertical: SIZES.padding,
@@ -99,7 +138,37 @@ const SignUp = ({ navigation }) => {
           />
         </View>
 
-        {/* Username */}
+        {/* Zones */}
+        <View style={{ marginTop: SIZES.padding, zIndex: 99999 }}>
+          <DropDownPicker
+            items={ZONES.data}
+            label='Title'
+            placeholder='Zone / Ministry Center'
+            onChangeItem={(item) => console.log(item.key, item.value)}
+            containerStyle={{
+              marginTop: "5%",
+              height: 50,
+              flex: 1,
+            }}
+            style={{
+              backgroundColor: "#ffffff",
+              color: COLORS.black,
+              borderRadius: 0,
+              justifyContent: "flex-start",
+              borderColor: "transparent",
+              borderBottomColor: COLORS.black,
+              borderBottomWidth: 1,
+              color: COLORS.black,
+              ...FONTS.body3,
+            }}
+            dropDownMaxHeight={150}
+            itemStyle={{
+              justifyContent: "flex-start",
+            }}
+            dropDownStyle={{ backgroundColor: "#fff" }}
+          />
+        </View>
+        {/* Church Name */}
         <View style={{ marginTop: SIZES.padding * 2 }}>
           <TextInput
             style={{
@@ -110,7 +179,51 @@ const SignUp = ({ navigation }) => {
               color: COLORS.black,
               ...FONTS.body3,
             }}
-            placeholder='Username'
+            placeholder='Church Name'
+            placeholderTextColor={COLORS.black}
+            selectionColor={COLORS.black}
+          />
+        </View>
+        {/* Email Address */}
+        <View style={{ marginTop: SIZES.padding * 3 }}>
+          <TextInput
+            style={{
+              marginVertical: SIZES.padding,
+              borderBottomColor: COLORS.black,
+              borderBottomWidth: 1,
+              height: 40,
+              color: COLORS.black,
+              ...FONTS.body3,
+            }}
+            onChangeText={(UserEmail) => console.log(UserEmail)}
+            autoCapitalize='none'
+            keyboardType='email-address'
+            returnKeyType='next'
+            underlineColorAndroid='#f000'
+            blurOnSubmit={false}
+            placeholder='Email Address'
+            placeholderTextColor={COLORS.black}
+            selectionColor={COLORS.black}
+          />
+        </View>
+        {/* Mobile Number */}
+        <View style={{ marginTop: SIZES.padding * 3 }}>
+          <TextInput
+            style={{
+              marginVertical: SIZES.padding,
+              borderBottomColor: COLORS.black,
+              borderBottomWidth: 1,
+              height: 40,
+              color: COLORS.black,
+              ...FONTS.body3,
+            }}
+            onChangeText={(UserEmail) => console.log(UserEmail)}
+            autoCapitalize='none'
+            keyboardType='numeric'
+            returnKeyType='next'
+            underlineColorAndroid='#f000'
+            blurOnSubmit={false}
+            placeholder='Mobile Number'
             placeholderTextColor={COLORS.black}
             selectionColor={COLORS.black}
           />

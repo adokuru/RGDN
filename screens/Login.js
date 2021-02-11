@@ -115,7 +115,7 @@ const Login = ({ navigation }) => {
           marginHorizontal: SIZES.padding * 3,
         }}
       >
-        {/* Full Name */}
+        {/* Email */}
         <View style={{ marginTop: SIZES.padding * 3 }}>
           <TextInput
             style={{
