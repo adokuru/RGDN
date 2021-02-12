@@ -17,6 +17,7 @@ export default Copies = ({ navigation }) => {
     navigation.toggleDrawer();
   };
   let name = global.uDm;
+  let earnings = global.earnings;
   function renderButton() {
     return (
       <View style={{ margin: SIZES.padding * 1 }}>
@@ -87,7 +88,7 @@ export default Copies = ({ navigation }) => {
           marginBottom: SIZES.padding,
         }}
       >
-        ₦ 0.00
+        {earnings === 0 ? "₦0.00" : "₦" + earnings + ".00"}
       </Text>
       <Text
         center

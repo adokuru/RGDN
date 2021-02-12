@@ -42,6 +42,7 @@ export default function Wallet({ navigation }) {
     navigation.toggleDrawer();
   };
   let name = global.uDm;
+  let earnings = global.earnings;
   function renderForm() {
     return (
       <View>
@@ -174,7 +175,7 @@ export default function Wallet({ navigation }) {
           marginBottom: SIZES.padding,
         }}
       >
-        ₦12 487.12
+        {earnings === 0 ? "₦0.00" : "₦" + earnings + ".00"}
       </Text>
       <Text
         center
