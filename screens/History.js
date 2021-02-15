@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Platform,
+} from "react-native";
 import styled from "styled-components";
 import { COLORS, FONTS, icons } from "../constants";
 import Text from "../constants/Text";
@@ -113,24 +119,26 @@ export default function History({ navigation }) {
         renderItem={renderPurchase}
         showsVerticalScrollIndicator={false}
       />
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Wallet")}
-          style={styles.touchableOpacityStyle}
-        >
-          <Image
-            // FAB using TouchableOpacity with an image
-            // For online image
-            source={icons.wallet}
-            // For local image
-            //source={require('./images/float-add-icon.png')}
-            style={{
-              ...styles.floatingButtonStyle,
-              tintColor: COLORS.primary,
-            }}
-          />
-        </TouchableOpacity>
-      </View>
+      {Platform.OS === "ios" ? (
+        <View style={styles.container}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Wallet")}
+            style={styles.touchableOpacityStyle}
+          >
+            <Image
+              // FAB using TouchableOpacity with an image
+              // For online image
+              source={icons.wallet}
+              // For local image
+              //source={require('./images/float-add-icon.png')}
+              style={{
+                ...styles.floatingButtonStyle,
+                tintColor: COLORS.primary,
+              }}
+            />
+          </TouchableOpacity>
+        </View>
+      ) : null}
     </Container>
   );
 }
