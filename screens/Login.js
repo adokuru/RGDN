@@ -53,6 +53,7 @@ const Login = ({ navigation }) => {
         //Hide Loader
         setLoading(false);
         let user = responseJson.userData[0];
+        console.log(user);
         // If server response message same as Data Matched
         if (responseJson.success === "200") {
           AsyncStorage.setItem("user", JSON.stringify(user))
@@ -63,6 +64,7 @@ const Login = ({ navigation }) => {
               setErrortext("There was an error saving the product");
             });
         } else {
+          alert("Email or Password Incorrect");
           setErrortext(responseJson.message);
         }
       })

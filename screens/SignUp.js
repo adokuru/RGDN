@@ -21,11 +21,24 @@ import {
   icons,
   images,
   TITLE,
-  ZONES,
 } from "../constants";
 import DropDownPicker from "react-native-dropdown-picker";
 
 const SignUp = ({ navigation }) => {
+  const [zones, setZones] = React.useState([]);
+  React.useEffect(() => {
+    fetch("https://rgdn.org/api/getZone.php")
+      .then((response) => response.json())
+      .then((data) => {
+        let zoneData = data.data.map((item) => {
+          return {
+            label: item.value,
+            value: item.key,
+          };
+        });
+        setZones(zoneData);
+  }, []);
+
   const [showPassword, setShowPassword] = React.useState(false);
   function renderHeader() {
     return (
@@ -141,7 +154,7 @@ const SignUp = ({ navigation }) => {
         {/* Zones */}
         <View style={{ marginTop: SIZES.padding, zIndex: 99999 }}>
           <DropDownPicker
-            items={ZONES.data}
+            items={zones.data}
             label='Title'
             placeholder='Zone / Ministry Center'
             onChangeItem={(item) => console.log(item.key, item.value)}
