@@ -14,29 +14,25 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
-import {
-  COLORS,
-  SIZES,
-  FONTS,
-  icons,
-  images,
-  TITLE,
-} from "../constants";
+import { COLORS, SIZES, FONTS, icons, images, TITLE } from "../constants";
 import DropDownPicker from "react-native-dropdown-picker";
 
 const SignUp = ({ navigation }) => {
   const [zones, setZones] = React.useState([]);
+
   React.useEffect(() => {
     fetch("https://rgdn.org/api/getZone.php")
       .then((response) => response.json())
       .then((data) => {
-        let zoneData = data.data.map((item) => {
+        let zoneData = data.zoneData;
+        let zone = zoneData.map((item) => {
           return {
             label: item.value,
             value: item.key,
           };
         });
-        setZones(zoneData);
+        setZones(zone);
+      });
   }, []);
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -109,13 +105,22 @@ const SignUp = ({ navigation }) => {
             items={TITLE.data}
             label='Title'
             placeholder='Select Title'
-            onChangeItem={(item) => console.log(item.key, item.value)}
+            onChangeItem={(item) => console.log(item.value)}
             containerStyle={{
               marginTop: "5%",
               height: 50,
               flex: 1,
             }}
+            placeholderStyle={{
+              color: COLORS.black,
+              ...FONTS.body3,
+              right: 12,
+            }}
             style={{
+              borderTopLeftRadius: 0,
+              borderTopRightRadius: 0,
+              borderBottomLeftRadius: 0,
+              borderBottomRightRadius: 0,
               backgroundColor: "#ffffff",
               color: COLORS.black,
               borderRadius: 0,
@@ -126,9 +131,11 @@ const SignUp = ({ navigation }) => {
               color: COLORS.black,
               ...FONTS.body3,
             }}
-            dropDownMaxHeight={150}
+            dropDownMaxHeight={100}
             itemStyle={{
               justifyContent: "flex-start",
+              color: COLORS.black,
+              ...FONTS.body3,
             }}
             dropDownStyle={{ backgroundColor: "#fff" }}
           />
@@ -152,21 +159,29 @@ const SignUp = ({ navigation }) => {
         </View>
 
         {/* Zones */}
-        <View style={{ marginTop: SIZES.padding, zIndex: 99999 }}>
+        <View style={{ zIndex: 99999 }}>
           <DropDownPicker
-            items={zones.data}
+            items={zones}
             label='Title'
             placeholder='Zone / Ministry Center'
-            onChangeItem={(item) => console.log(item.key, item.value)}
+            onChangeItem={(item) => console.log(item.value)}
             containerStyle={{
               marginTop: "5%",
               height: 50,
               flex: 1,
             }}
+            placeholderStyle={{
+              color: COLORS.black,
+              ...FONTS.body3,
+              right: 12,
+            }}
             style={{
+              borderTopLeftRadius: 0,
+              borderTopRightRadius: 0,
+              borderBottomLeftRadius: 0,
+              borderBottomRightRadius: 0,
               backgroundColor: "#ffffff",
               color: COLORS.black,
-              borderRadius: 0,
               justifyContent: "flex-start",
               borderColor: "transparent",
               borderBottomColor: COLORS.black,
@@ -177,6 +192,8 @@ const SignUp = ({ navigation }) => {
             dropDownMaxHeight={150}
             itemStyle={{
               justifyContent: "flex-start",
+              color: COLORS.black,
+              ...FONTS.body3,
             }}
             dropDownStyle={{ backgroundColor: "#fff" }}
           />

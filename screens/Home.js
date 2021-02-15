@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import PaystackWebView from "react-native-paystack-webview";
+
 import {
   View,
   TouchableWithoutFeedback,
@@ -45,6 +47,8 @@ export default Home = ({ navigation }) => {
   let userDetail = user;
   global.uDm = userDetail.name;
   global.earnings = userDetail.earnings;
+  global.refnum = userDetail.referralLink;
+  console.log(global.refnum);
   let name = userDetail.name;
 
   const toggleDrawer = () => {

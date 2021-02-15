@@ -1,4 +1,6 @@
 import React from "react";
+import PaystackWebView from "react-native-paystack-webview";
+
 import {
   View,
   TouchableOpacity,

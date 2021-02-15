@@ -1,37 +1,64 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-} from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
+import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
 import styled from "styled-components";
-import { COLORS, FONTS, icons, SIZES } from "../constants";
+import { COLORS, FONTS, icons } from "../constants";
 import Text from "../constants/Text";
-import purchaseData from "../purchases";
+import Loader from "../constants/Loader";
 
 export default function History({ navigation }) {
+  const [historyListData, setHistoryListData] = useState([]);
   let name = global.uDm;
+  let refnum = global.refnum;
+  const [loading, setLoading] = useState(false);
   const toggleDrawer = () => {
     navigation.toggleDrawer();
   };
-  const renderPurchase = ({ item }) => (
+  useEffect(() => {
+    setLoading(true);
+    fetch("https://rgdn.org/api/myHistory.php", {
+      method: "POST",
+      body: JSON.stringify({
+        referralLink: refnum,
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        let ListData = responseJson.historyData.map((item) => {
+          return {
+            amount: item.amount,
+            name: item.name,
+            date: item.created,
+            key: "_" + Math.random().toString(36).substr(2, 9),
+          };
+        });
+        setHistoryListData(ListData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        //Hide Loader
+        setLoading(false);
+        alert("Please Check Internet Connection");
+      });
+  }, []);
+
+  console.log(historyListData[0]);
+
+  const renderPurchase = () => (
     <Purchase>
       <PurchaseInfo>
-        <Text heavy>{item.product}</Text>
+        <Text heavy>{historyListData[0].name}</Text>
 
         <Text small color='#111111'>
-          {item.purchaseDate}
+          {historyListData[0].date}
         </Text>
       </PurchaseInfo>
-      <Text heavy>{item.price}</Text>
+      <Text heavy>₦{historyListData[0].amount}</Text>
     </Purchase>
   );
 
   return (
     <Container>
+      <Loader loading={loading} />
       <StatusBar barStyle='light-content' />
       <Header>
         <TouchableOpacity onPress={toggleDrawer}>
@@ -48,7 +75,7 @@ export default function History({ navigation }) {
               color: COLORS.white,
             }}
           >
-            Sponsor Copies
+            History
           </Text>
         </Welcome>
         <View style={{ alignItems: "center", justifyContent: "center" }}>
@@ -82,7 +109,7 @@ export default function History({ navigation }) {
             <SearchContainer></SearchContainer>
           </>
         }
-        data={purchaseData}
+        data={historyListData}
         renderItem={renderPurchase}
         showsVerticalScrollIndicator={false}
       />

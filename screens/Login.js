@@ -52,20 +52,21 @@ const Login = ({ navigation }) => {
       .then((responseJson) => {
         //Hide Loader
         setLoading(false);
-        let user = responseJson.userData[0];
-        console.log(user);
         // If server response message same as Data Matched
+        console.log(responseJson);
         if (responseJson.success === "200") {
+          //Store variable
+          let user = responseJson.userData[0];
           AsyncStorage.setItem("user", JSON.stringify(user))
             .then(() => {
               navigation.replace("DrawerNavigationRoutes");
             })
             .catch(() => {
-              setErrortext("There was an error saving the product");
+              console.log("There was an error saving the product");
             });
         } else {
-          alert("Email or Password Incorrect");
           setErrortext(responseJson.message);
+          alert(responseJson.message);
         }
       })
       .catch((error) => {
