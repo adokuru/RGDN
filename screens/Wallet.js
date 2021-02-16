@@ -6,12 +6,16 @@ import {
   KeyboardAvoidingView,
   Image,
   ScrollView,
+  Picker,
 } from "react-native";
+
+import RNPickerSelect from "react-native-picker-select";
+
 import styled from "styled-components";
 import { LinearGradient } from "expo-linear-gradient";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
 import Text from "../constants/Text";
-import { Input, Block } from "galio-framework";
+import { Input } from "galio-framework";
 import DropDownPicker from "react-native-dropdown-picker";
 
 export default function Wallet({ navigation }) {
@@ -47,7 +51,7 @@ export default function Wallet({ navigation }) {
     return (
       <View>
         <View style={{ Top: 40, zIndex: 99999 }}>
-          <DropDownPicker
+          {/* <DropDownPicker
             items={banks}
             label='Bank'
             placeholder='Select a Bank'
@@ -68,6 +72,14 @@ export default function Wallet({ navigation }) {
               justifyContent: "flex-start",
             }}
             dropDownStyle={{ backgroundColor: "#fafafa" }}
+          /> */}
+          <RNPickerSelect
+            onValueChange={(value) => console.log(value)}
+            items={[
+              { label: "Football", value: "football" },
+              { label: "Baseball", value: "baseball" },
+              { label: "Hockey", value: "hockey" },
+            ]}
           />
         </View>
         <View>

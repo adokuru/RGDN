@@ -126,7 +126,7 @@ const SearchContainer = styled.View`
 const Search = styled.TextInput`
   flex: 1;
   padding: 8px 16px;
-  font-family: "Avenir";
+  font-family: "Roboto-Black";
   color: #111111;
 `;
 

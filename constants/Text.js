@@ -7,7 +7,7 @@ export default TextStyle = ({ ...props }) => {
 
 const Text = styled.Text`
   color: ${(props) => props.color ?? "#696969"};
-  font-family: "Avenir";
+  font-family: "Roboto-Black";
   margin: ${(props) => props.margin ?? 0};
   padding: ${(props) => props.padding ?? 0};
 

@@ -148,7 +148,7 @@ export default Home = ({ navigation }) => {
       <StatusBar barStyle='light-content' />
       <View
         style={{
-          flex: "1",
+          flex: 1,
           justifyContent: "center",
           alignContent: "center",
           backgroundColor: "white",
@@ -282,7 +282,7 @@ const SearchContainer = styled.View`
 const Search = styled.TextInput`
   flex: 1;
   padding: 8px 16px;
-  font-family: "Avenir";
+  font-family: "Roboto-Black";
   color: #111111;
 `;
 

@@ -104,7 +104,7 @@ export default Copies = ({ navigation }) => {
       <StatusBar barStyle='light-content' />
       <View
         style={{
-          flex: "1",
+          flex: 1,
           justifyContent: "center",
           alignContent: "center",
           backgroundColor: "white",
