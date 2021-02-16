@@ -55,7 +55,7 @@ export default function Wallet({ navigation }) {
             items={banks}
             label='Bank'
             placeholder='Select a Bank'
-            onChangeItem={(item) => console.log(item.key, item.value)}
+            onChangeItem={(item) => setBank(item.key, item.value)}
             containerStyle={{
               marginTop: "5%",
               height: 50,

@@ -53,7 +53,6 @@ const Login = ({ navigation }) => {
         //Hide Loader
         setLoading(false);
         // If server response message same as Data Matched
-        console.log(responseJson);
         if (responseJson.success === "200") {
           //Store variable
           let user = responseJson.userData[0];

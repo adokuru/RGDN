@@ -61,18 +61,6 @@ const SignUp = ({ navigation }) => {
     }
     setLoading(true);
 
-    const data = JSON.stringify({
-      title: title,
-      name: name,
-      ministry: ministry,
-      church: church,
-      email: userEmail,
-      mobile: mobile,
-      password: userPassword,
-    });
-
-    console.log(data);
-
     fetch("https://rgdn.org/api/createAccount.php", {
       method: "POST",
       body: JSON.stringify({
@@ -95,7 +83,6 @@ const SignUp = ({ navigation }) => {
         //Hide Loader
         setLoading(false);
         // If server response message same as Data Matched
-        console.log(responseJson);
         if (responseJson.success === "200") {
           //Store variable
           alert("Sign Up Completed");

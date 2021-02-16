@@ -47,8 +47,6 @@ export default function History({ navigation }) {
       });
   }, []);
 
-  console.log(historyListData[0]);
-
   const renderPurchase = () => (
     <Purchase>
       <PurchaseInfo>

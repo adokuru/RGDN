@@ -48,7 +48,6 @@ export default Home = ({ navigation }) => {
   global.uDm = userDetail.name;
   global.earnings = userDetail.earnings;
   global.refnum = userDetail.referralLink;
-  console.log(global.refnum);
   let name = userDetail.name;
 
   const toggleDrawer = () => {
