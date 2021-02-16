@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -16,10 +16,102 @@ import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import { COLORS, SIZES, FONTS, icons, images, TITLE } from "../constants";
 import DropDownPicker from "react-native-dropdown-picker";
+import Loader from "../constants/Loader";
 
 const SignUp = ({ navigation }) => {
   const [zones, setZones] = React.useState([]);
+  const [userEmail, setUserEmail] = useState("");
+  const [title, setTitle] = useState("");
+  const [name, setName] = useState("");
+  const [church, setChurch] = useState("");
+  const [ministry, setMinistry] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [errortext, setErrortext] = useState("");
+  const [loading, setLoading] = useState(false);
+  const handleSubmitPress = () => {
+    setErrortext("");
+    if (!userEmail) {
+      alert("Please fill Email");
+      return;
+    }
+    if (!userPassword) {
+      alert("Please fill Password");
+      return;
+    }
+    if (!title) {
+      alert("Please select Title");
+      return;
+    }
+    if (!name) {
+      alert("Please fill Name");
+      return;
+    }
+    if (!church) {
+      alert("Please fill Church");
+      return;
+    }
+    if (!ministry) {
+      alert("Please fill Ministry");
+      return;
+    }
+    if (!mobile) {
+      alert("Please fill Phone Number");
+      return;
+    }
+    setLoading(true);
 
+    const data = JSON.stringify({
+      title: title,
+      name: name,
+      ministry: ministry,
+      church: church,
+      email: userEmail,
+      mobile: mobile,
+      password: userPassword,
+    });
+
+    console.log(data);
+
+    fetch("https://rgdn.org/api/createAccount.php", {
+      method: "POST",
+      body: JSON.stringify({
+        title: title,
+        name: name,
+        ministry: ministry,
+        church: church,
+        email: userEmail,
+        mobile: mobile,
+        password: userPassword,
+      }),
+      headers: {
+        //Header Defination
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        //Hide Loader
+        setLoading(false);
+        // If server response message same as Data Matched
+        console.log(responseJson);
+        if (responseJson.success === "200") {
+          //Store variable
+          alert("Sign Up Completed");
+          navigation.replace("Login");
+          return;
+        } else {
+          setErrortext(responseJson.message);
+          alert(responseJson.message);
+          return;
+        }
+      })
+      .catch((error) => {
+        //Hide Loader
+        setLoading(false);
+      });
+  };
   React.useEffect(() => {
     fetch("https://rgdn.org/api/getZone.php")
       .then((response) => response.json())
@@ -100,12 +192,16 @@ const SignUp = ({ navigation }) => {
         }}
       >
         {/* Title */}
-        <View style={{ marginTop: SIZES.padding * 2, zIndex: 99999 }}>
+        <View
+          style={
+            Platform.OS === "ios" ? { Top: 40, zIndex: 99999 } : { Top: 40 }
+          }
+        >
           <DropDownPicker
             items={TITLE.data}
             label='Title'
             placeholder='Select Title'
-            onChangeItem={(item) => console.log(item.value)}
+            onChangeItem={(item) => setTitle(item.value)}
             containerStyle={{
               marginTop: "5%",
               height: 50,
@@ -152,6 +248,7 @@ const SignUp = ({ navigation }) => {
               color: COLORS.black,
               ...FONTS.body3,
             }}
+            onChangeText={(name) => setName(name)}
             placeholder='Enter Full Name'
             placeholderTextColor={COLORS.black}
             selectionColor={COLORS.black}
@@ -159,12 +256,16 @@ const SignUp = ({ navigation }) => {
         </View>
 
         {/* Zones */}
-        <View style={{ zIndex: 99999 }}>
+        <View
+          style={
+            Platform.OS === "ios" ? { Top: 40, zIndex: 99999 } : { Top: 40 }
+          }
+        >
           <DropDownPicker
             items={zones}
             label='Title'
             placeholder='Zone / Ministry Center'
-            onChangeItem={(item) => console.log(item.value)}
+            onChangeItem={(item) => setMinistry(item.value)}
             containerStyle={{
               marginTop: "5%",
               height: 50,
@@ -209,6 +310,7 @@ const SignUp = ({ navigation }) => {
               color: COLORS.black,
               ...FONTS.body3,
             }}
+            onChangeText={(Church) => setChurch(Church)}
             placeholder='Church Name'
             placeholderTextColor={COLORS.black}
             selectionColor={COLORS.black}
@@ -225,7 +327,7 @@ const SignUp = ({ navigation }) => {
               color: COLORS.black,
               ...FONTS.body3,
             }}
-            onChangeText={(UserEmail) => console.log(UserEmail)}
+            onChangeText={(UserEmail) => setUserEmail(UserEmail)}
             autoCapitalize='none'
             keyboardType='email-address'
             returnKeyType='next'
@@ -247,7 +349,7 @@ const SignUp = ({ navigation }) => {
               color: COLORS.black,
               ...FONTS.body3,
             }}
-            onChangeText={(UserEmail) => console.log(UserEmail)}
+            onChangeText={(mobile) => setMobile(mobile)}
             autoCapitalize='none'
             keyboardType='numeric'
             returnKeyType='next'
@@ -270,6 +372,7 @@ const SignUp = ({ navigation }) => {
               color: COLORS.black,
               ...FONTS.body3,
             }}
+            onChangeText={(password) => setUserPassword(password)}
             placeholder='Enter Password'
             placeholderTextColor={COLORS.black}
             selectionColor={COLORS.black}
@@ -310,7 +413,7 @@ const SignUp = ({ navigation }) => {
             alignItems: "center",
             justifyContent: "center",
           }}
-          onPress={() => navigation.replace("DrawerNavigationRoutes")}
+          onPress={handleSubmitPress}
         >
           <Text style={{ color: COLORS.white, ...FONTS.h3 }}>Sign Up</Text>
         </TouchableOpacity>
@@ -323,12 +426,24 @@ const SignUp = ({ navigation }) => {
       behavior={Platform.OS === "ios" ? "padding" : null}
       style={{ flex: 1 }}
     >
+      <Loader loading={loading} />
       <LinearGradient colors={[COLORS.white, COLORS.white]} style={{ flex: 1 }}>
         <ScrollView>
           {renderHeader()}
           {renderLogo()}
           {renderForm()}
           {renderButton()}
+          {errortext != "" ? (
+            <Text
+              style={{
+                color: "red",
+                textAlign: "center",
+                ...FONTS.h2,
+              }}
+            >
+              {errortext}
+            </Text>
+          ) : null}
         </ScrollView>
       </LinearGradient>
     </KeyboardAwareScrollView>
